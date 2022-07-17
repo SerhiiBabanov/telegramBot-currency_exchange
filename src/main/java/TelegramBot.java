@@ -1,5 +1,5 @@
-import command.EditCommand;
-import command.SendCommand;
+import command.editCommand.EditCommand;
+import command.sendCommand.SendCommand;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -7,10 +7,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    private List<EditCommand> editCommands;
-    private List<SendCommand> sendCommands;
+    private final List<EditCommand> editCommands;
+    private final List<SendCommand> sendCommands;
 
     public TelegramBot(List<EditCommand> editCommands, List<SendCommand> sendCommands) {
         super();
@@ -20,12 +21,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return null;
+        return "goit_java_telegram_bot";
     }
 
     @Override
     public String getBotToken() {
-        return null;
+        return "5588477547:AAHAGkA7oAgtwJTdH34DIC5DocwS_dSKOvY";
     }
 
     @Override
@@ -48,14 +49,25 @@ public class TelegramBot extends TelegramLongPollingBot {
             String callData = update.getCallbackQuery().getData();
             long messageId = update.getCallbackQuery().getMessage().getMessageId();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
-            EditMessageText editMessage = new EditMessageText();
+            EditMessageText editMessage = null;
             for (EditCommand command : editCommands) {
                 if (command.canExecute(callData)) {
                     editMessage  = command.execute(chatId);
                 }
             }
+            SendMessage message = null;
+            for (SendCommand command : sendCommands) {
+                if (command.canExecute(callData)) {
+                    message = command.execute(chatId);
+                }
+            }
             try {
-                execute(editMessage);
+                if(Objects.nonNull(editMessage)){
+                    execute(editMessage);
+                }
+                if (Objects.nonNull(message)){
+                    execute(message);
+                }
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }

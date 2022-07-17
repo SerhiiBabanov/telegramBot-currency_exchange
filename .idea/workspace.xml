@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dbbc193-e244-4e86-92d5-1fdc23f40a8e" name="Changes" comment="Start project. Create main files, classes and packaging">
+    <list default="true" id="6dbbc193-e244-4e86-92d5-1fdc23f40a8e" name="Changes" comment="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional">
+      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/Setting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/EditCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/SendCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/SendCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +53,20 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="goit-java-telegramBot.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658077186854</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional">
+      <created>1658083722295</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658083722295</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -78,6 +106,23 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Start project. Create main files, classes and packaging" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start project. Create main files, classes and packaging" />
+    <MESSAGE value="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional" />
+    <option name="LAST_COMMIT_MESSAGE" value="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/TelegramBot.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/TelegramBot.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
