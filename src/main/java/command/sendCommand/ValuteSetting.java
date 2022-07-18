@@ -31,7 +31,7 @@ public class ValuteSetting extends SendCommand{
         if (chatSetting.getValutes().contains(Valute.CAN)){
             can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PZL)){
+        if (chatSetting.getValutes().contains(Valute.PLZ)){
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();

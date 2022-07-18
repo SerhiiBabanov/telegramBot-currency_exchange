@@ -40,7 +40,7 @@ public class CAN extends EditCommand{
             repository.add(chatSetting.getChatId(), chatSetting);
             can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PZL)){
+        if (chatSetting.getValutes().contains(Valute.PLZ)){
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
 

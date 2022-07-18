@@ -5,34 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dbbc193-e244-4e86-92d5-1fdc23f40a8e" name="Changes" comment="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/CAN.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/PZL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/RoundDigitSettingFour.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/RoundDigitSettingTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/RoundDigitSettingTwo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/SetBankMonobank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/SetBankNBU.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/SetBankPrivatbank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/USD.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/BankSetting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/GetInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/RoundDigitSetting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/ValuteSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bank/privatbank/Exchange.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/monobank/Monobank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/monobank/Monobank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/nbu/NBU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/nbu/NBU.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/privatbank/Privatbank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/privatbank/Privatbank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/editCommand/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/EditCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/SendCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/SendCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/Setting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ChatSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ChatSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/InMemoryMapRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/InMemoryMapRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/editCommand/CAN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/CAN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/editCommand/PZL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/PZL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/editCommand/USD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/USD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/GetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/GetInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/ValuteSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/ValuteSetting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Valute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Valute.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,5 +143,16 @@
     <MESSAGE value="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional" />
     <MESSAGE value="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java" />
     <option name="LAST_COMMIT_MESSAGE" value="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

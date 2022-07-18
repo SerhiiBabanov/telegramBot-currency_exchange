@@ -1,15 +1,21 @@
 package bank.monobank;
 
 import model.Bank;
+import model.Valute;
 
 public class Monobank extends Bank {
     @Override
-    protected double getValuteExchange() {
+    public double getValuteExchangeBay(Valute valute) {
         return 0;
     }
 
     @Override
-    public String toString() {
+    public double getValuteExchangeSell(Valute valute) {
+        return 0;
+    }
+
+
+    public String toString(Valute valute) {
         return "Monobank";
     }
 

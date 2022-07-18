@@ -41,7 +41,7 @@ public class USD extends EditCommand{
             repository.add(chatSetting.getChatId(), chatSetting);
             usd.setText(EmojiParser.parseToUnicode(":white_check_mark:" + usd.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PZL)){
+        if (chatSetting.getValutes().contains(Valute.PLZ)){
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
 

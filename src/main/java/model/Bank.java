@@ -1,5 +1,6 @@
 package model;
 
 public abstract class Bank {
-    protected abstract double getValuteExchange();
+    public abstract double getValuteExchangeBay(Valute valute);
+    public abstract double getValuteExchangeSell(Valute valute);
 }
