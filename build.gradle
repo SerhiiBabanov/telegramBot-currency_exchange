@@ -12,6 +12,8 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/org.telegram/telegrambots
     implementation group: 'org.telegram', name: 'telegrambots', version: '6.1.0'
+    // https://mvnrepository.com/artifact/com.vdurmont/emoji-java
+    implementation group: 'com.vdurmont', name: 'emoji-java', version: '4.0.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

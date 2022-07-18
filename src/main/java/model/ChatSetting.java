@@ -1,5 +1,12 @@
 package model;
 
+import bank.privatbank.Privatbank;
+import command.editCommand.CAN;
+import command.editCommand.USD;
+import command.sendCommand.Setting;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +55,16 @@ public class ChatSetting {
 
     public int getReminderTime() {
         return reminderTime;
+    }
+    public static ChatSetting getDefault(long chatId){
+        ChatSetting defaultSetting = new ChatSetting(chatId);
+        defaultSetting.setBank(new Privatbank());
+        defaultSetting.setRoundDigit(2);
+        List<Valute> valuteList = new ArrayList<>();
+        valuteList.add(Valute.CAN);
+        valuteList.add(Valute.USD);
+        defaultSetting.setValutes(valuteList);
+        return defaultSetting;
     }
 
     public void setReminderTime(int reminderTime) {

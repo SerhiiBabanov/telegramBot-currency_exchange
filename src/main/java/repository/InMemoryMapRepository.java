@@ -27,7 +27,7 @@ public class InMemoryMapRepository implements Repository{
     }
 
     @Override
-    public Optional<ChatSetting> getSetting(long chatId) {
-        return Optional.ofNullable(chatSettings.get(chatId));
+    public ChatSetting getSetting(long chatId) {
+        return chatSettings.get(chatId);
     }
 }

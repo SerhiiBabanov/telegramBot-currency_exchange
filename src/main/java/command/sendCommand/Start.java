@@ -1,5 +1,6 @@
 package command.sendCommand;
 
+import model.ChatSetting;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -14,15 +15,18 @@ public class Start extends SendCommand{
     }
 
     @Override
-    public SendMessage execute(long chatId) {
+    public SendMessage execute(ChatSetting chatSetting) {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
+        sendMessage.setChatId(chatSetting.getChatId());
         sendMessage.setText("You send start");
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
-        rowInLine.add(new Setting().getButton());
-        rowsInLine.add(rowInLine);
+        List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();
+        rowInLine0.add(new GetInfo().getButton());
+        rowsInLine.add(rowInLine0);
+        List<InlineKeyboardButton> rowInLine1 = new ArrayList<>();
+        rowInLine1.add(new Setting().getButton());
+        rowsInLine.add(rowInLine1);
         inlineKeyboardMarkup.setKeyboard(rowsInLine);
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
         return sendMessage;
