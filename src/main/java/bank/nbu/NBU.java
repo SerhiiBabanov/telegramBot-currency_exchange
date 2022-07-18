@@ -7,4 +7,9 @@ public class NBU extends Bank {
     protected double getValuteExchange() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "NBU";
+    }
 }

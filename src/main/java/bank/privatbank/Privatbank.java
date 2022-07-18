@@ -7,4 +7,9 @@ public class Privatbank extends Bank {
     protected double getValuteExchange() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "Privatbank";
+    }
 }
