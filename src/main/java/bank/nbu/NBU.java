@@ -14,6 +14,11 @@ public class NBU extends Bank {
         return 0;
     }
 
+    @Override
+    public String getButtonCallbackData() {
+        return "/setNBU";
+    }
+
 
     public String toString() {
         return "NBU";

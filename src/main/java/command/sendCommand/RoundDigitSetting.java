@@ -2,16 +2,17 @@ package command.sendCommand;
 
 
 import com.vdurmont.emoji.EmojiParser;
-import command.editCommand.RoundDigitSettingFour;
-import command.editCommand.RoundDigitSettingTree;
-import command.editCommand.RoundDigitSettingTwo;
+import command.editCommand.*;
 import model.ChatSetting;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoundDigitSetting extends SendCommand{
     public RoundDigitSetting() {
@@ -21,34 +22,26 @@ public class RoundDigitSetting extends SendCommand{
 
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatSetting.getChatId());
-        sendMessage.setText(commandName);
-        InlineKeyboardButton two_digit = new RoundDigitSettingTwo().getButton();
-        InlineKeyboardButton tree_digit = new RoundDigitSettingTree().getButton();
-        InlineKeyboardButton four_digit = new RoundDigitSettingFour().getButton();
-        if (chatSetting.getRoundDigit() == 2){
-            two_digit.setText(EmojiParser.parseToUnicode(":white_check_mark:" + two_digit.getText()));
-        }
-        if (chatSetting.getRoundDigit() == 3){
-            tree_digit.setText(EmojiParser.parseToUnicode(":white_check_mark:" + tree_digit.getText()));
-        }
-        if (chatSetting.getRoundDigit() == 4){
-            four_digit.setText(EmojiParser.parseToUnicode(":white_check_mark:" + four_digit.getText()));
-        }
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();
-        rowInLine0.add(two_digit);
-        rowsInLine.add(rowInLine0);
-        List<InlineKeyboardButton> rowInLine1 = new ArrayList<>();
-        rowInLine1.add(tree_digit);
-        rowsInLine.add(rowInLine1);
-        List<InlineKeyboardButton> rowInLine2 = new ArrayList<>();
-        rowInLine2.add(four_digit);
-        rowsInLine.add(rowInLine2);
-        inlineKeyboardMarkup.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-        return sendMessage;
+
+        List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
+        settingsButtons.add(List.of(new RoundDigitSettingTwo().getButton()));
+        settingsButtons.add(List.of(new RoundDigitSettingTree().getButton()));
+        settingsButtons.add(List.of(new RoundDigitSettingFour().getButton()));
+
+        settingsButtons = settingsButtons.stream()
+                .flatMap(Collection::stream)
+                .peek(button -> {
+                    if (button.getText().equals(String.valueOf(chatSetting.getRoundDigit()))){
+                        button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
+                    }
+                })
+                .map(Arrays::asList)
+                .collect(Collectors.toList());
+
+        return SendMessage.builder()
+                .text(buttonText)
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
+                .chatId(chatSetting.getChatId())
+                .build();
     }
 }

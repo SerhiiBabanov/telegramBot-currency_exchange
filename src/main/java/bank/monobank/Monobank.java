@@ -14,6 +14,11 @@ public class Monobank extends Bank {
         return 0;
     }
 
+    @Override
+    public String getButtonCallbackData() {
+        return "/setMonobank";
+    }
+
 
     public String toString(Valute valute) {
         return "Monobank";

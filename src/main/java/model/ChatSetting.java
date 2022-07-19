@@ -61,7 +61,7 @@ public class ChatSetting {
         defaultSetting.setBank(new Privatbank());
         defaultSetting.setRoundDigit(2);
         List<Valute> valuteList = new ArrayList<>();
-        valuteList.add(Valute.CAN);
+
         valuteList.add(Valute.USD);
         defaultSetting.setValutes(valuteList);
         return defaultSetting;

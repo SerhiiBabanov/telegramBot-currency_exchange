@@ -13,7 +13,7 @@ import java.util.List;
 public class RoundDigitSettingFour extends EditCommand{
     public RoundDigitSettingFour() {
         commandName = "/roundDigitSettingFour";
-        buttonText = "RoundDigitSettingFour";
+        buttonText = "4";
     }
 
     @Override

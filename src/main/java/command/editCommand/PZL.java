@@ -29,14 +29,14 @@ public class PZL extends EditCommand{
         if (chatSetting.getValutes().contains(Valute.USD)){
             usd.setText(EmojiParser.parseToUnicode(":white_check_mark:" + usd.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PLZ)){
+        if (chatSetting.getValutes().contains(Valute.PZL)){
             List<Valute> valutes = chatSetting.getValutes();
-            valutes.remove(Valute.PLZ);
+            valutes.remove(Valute.PZL);
             chatSetting.setValutes(valutes);
             repository.add(chatSetting.getChatId(), chatSetting);
         } else {
             List<Valute> valutes = chatSetting.getValutes();
-            valutes.add(Valute.PLZ);
+            valutes.add(Valute.PZL);
             chatSetting.setValutes(valutes);
             repository.add(chatSetting.getChatId(), chatSetting);
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));

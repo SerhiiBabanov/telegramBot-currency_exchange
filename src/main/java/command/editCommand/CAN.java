@@ -3,13 +3,16 @@ package command.editCommand;
 import com.vdurmont.emoji.EmojiParser;
 import model.ChatSetting;
 import model.Valute;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import repository.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CAN extends EditCommand{
     public CAN() {
@@ -40,7 +43,7 @@ public class CAN extends EditCommand{
             repository.add(chatSetting.getChatId(), chatSetting);
             can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PLZ)){
+        if (chatSetting.getValutes().contains(Valute.PZL)){
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
 
@@ -59,5 +62,34 @@ public class CAN extends EditCommand{
         editMessageText.setReplyMarkup(inlineKeyboardMarkup);
         editMessageText.setText("Change setting");
         return editMessageText;
-    }
+//        List<Valute> valutes = chatSetting.getValutes();
+//        if (chatSetting.getValutes().contains(Valute.CAN)){
+//            valutes.remove(Valute.CAN);
+//        } else {
+//            valutes.add(Valute.CAN);
+//        }
+//        chatSetting.setValutes(valutes);
+//        repository.add(chatSetting.getChatId(), chatSetting);
+//
+//        List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
+//            settingsButtons.add(Arrays.asList(new USD().getButton()));
+//            settingsButtons.add(Arrays.asList(new CAN().getButton()));
+//            settingsButtons.add(Arrays.asList(new PZL().getButton()));
+//
+//            settingsButtons = settingsButtons.stream()
+//                    .flatMap(list -> list.stream())
+//                    .peek(button -> {
+//                        if ((chatSetting.getValutes().contains(Valute.valueOf(button.getText())))) {
+//                            button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
+//                        }
+//                    })
+//                    .map(button -> Arrays.asList(button))
+//                    .collect(Collectors.toList());
+//
+//            return EditMessageText.builder()
+//                    .text("Налаштування змінено")
+//                    .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
+//                    .chatId(chatSetting.getChatId())
+//                    .build();
+        }
 }

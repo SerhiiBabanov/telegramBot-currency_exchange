@@ -56,7 +56,12 @@ public class Privatbank extends Bank {
     }
 
     @Override
+    public String getButtonCallbackData() {
+        return "/setPrivatbank";
+    }
+
+    @Override
     public String toString() {
-        return "Privatbank";
+        return "/privatbank";
     }
 }

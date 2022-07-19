@@ -8,7 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BankSetting extends SendCommand{
     public BankSetting() {
@@ -18,36 +21,27 @@ public class BankSetting extends SendCommand{
 
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatSetting.getChatId());
-        sendMessage.setText(commandName);
-        InlineKeyboardButton monobank = new SetBankMonobank().getButton();
-        InlineKeyboardButton privatbank = new SetBankPrivatbank().getButton();
-        InlineKeyboardButton nbu = new SetBankNBU().getButton();
 
-        if (chatSetting.getBank().toString().equals("Monobank")){
-            monobank.setText(EmojiParser.parseToUnicode(":white_check_mark:" + monobank.getText()));
-        }
-        if (chatSetting.getBank().toString().equals("NBU")){
-            nbu.setText(EmojiParser.parseToUnicode(":white_check_mark:" + nbu.getText()));
-        }
-        if (chatSetting.getBank().toString().equals("Privatbank")){
-            privatbank.setText(EmojiParser.parseToUnicode(":white_check_mark:" + privatbank.getText()));
-        }
+        List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
+        settingsButtons.add(List.of(new SetBankMonobank().getButton()));
+        settingsButtons.add(List.of(new SetBankPrivatbank().getButton()));
+        settingsButtons.add(List.of(new SetBankNBU().getButton()));
 
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();
-        rowInLine0.add(monobank);
-        rowsInLine.add(rowInLine0);
-        List<InlineKeyboardButton> rowInLine1 = new ArrayList<>();
-        rowInLine1.add(privatbank);
-        rowsInLine.add(rowInLine1);
-        List<InlineKeyboardButton> rowInLine2 = new ArrayList<>();
-        rowInLine2.add(nbu);
-        rowsInLine.add(rowInLine2);
-        inlineKeyboardMarkup.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-        return sendMessage;
+        settingsButtons = settingsButtons.stream()
+                .flatMap(Collection::stream)
+                .peek(button -> {
+                    if (button.getCallbackData().equals(chatSetting.getBank().getButtonCallbackData())){
+                        button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
+                    }
+                })
+                .map(Arrays::asList)
+                .collect(Collectors.toList());
+
+        return SendMessage.builder()
+                .text(buttonText)
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
+                .chatId(chatSetting.getChatId())
+                .build();
     }
+
 }

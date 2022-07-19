@@ -13,7 +13,7 @@ import java.util.List;
 public class RoundDigitSettingTree extends EditCommand{
     public RoundDigitSettingTree() {
         commandName = "/roundDigitSettingTree";
-        buttonText = "roundDigitSettingTree";
+        buttonText = "3";
     }
 
     @Override
