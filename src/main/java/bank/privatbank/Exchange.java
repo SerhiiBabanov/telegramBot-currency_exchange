@@ -1,10 +1,22 @@
 package bank.privatbank;
 
+import java.util.Objects;
+
 public class Exchange {
     public String ccy;
     public String base_ccy;
     public double buy;
     public double sale;
+
+    public Exchange() {
+    }
+
+    public Exchange(String ccy, String base_ccy, double buy, double sale) {
+        this.ccy = ccy;
+        this.base_ccy = base_ccy;
+        this.buy = buy;
+        this.sale = sale;
+    }
 
     public String getCcy() {
         return ccy;
@@ -38,6 +50,26 @@ public class Exchange {
         this.sale = sale;
     }
 
-    public Exchange() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exchange exchange = (Exchange) o;
+        return ccy.equals(exchange.ccy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ccy);
+    }
+
+    @Override
+    public String toString() {
+        return "Exchange{" +
+                "ccy='" + ccy + '\'' +
+                ", base_ccy='" + base_ccy + '\'' +
+                ", buy=" + buy +
+                ", sale=" + sale +
+                '}';
     }
 }

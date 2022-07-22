@@ -27,9 +27,9 @@ public class Main {
         editCommands.add(new SetBankMonobank());
         editCommands.add(new SetBankNBU());
         editCommands.add(new SetBankPrivatbank());
-        editCommands.add(new PZL());
+        editCommands.add(new PLZ());
         editCommands.add(new USD());
-        editCommands.add(new CAN());
+        editCommands.add(new CAD());
         // Register our bot
         try {
             telegramBotsApi.registerBot(new TelegramBot(editCommands, sendCommands, settingsChat));

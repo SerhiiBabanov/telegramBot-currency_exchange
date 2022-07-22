@@ -1,12 +1,8 @@
 package model;
 
 import bank.privatbank.Privatbank;
-import command.editCommand.CAN;
-import command.editCommand.USD;
-import command.sendCommand.Setting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

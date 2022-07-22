@@ -25,8 +25,8 @@ public class ValuteSetting extends SendCommand{
 //
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
         settingsButtons.add(List.of(new USD().getButton()));
-        settingsButtons.add(List.of(new CAN().getButton()));
-        settingsButtons.add(List.of(new PZL().getButton()));
+        settingsButtons.add(List.of(new CAD().getButton()));
+        settingsButtons.add(List.of(new PLZ().getButton()));
 
         settingsButtons = settingsButtons.stream()
                 .flatMap(Collection::stream)

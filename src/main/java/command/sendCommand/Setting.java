@@ -12,7 +12,7 @@ import java.util.List;
 public class Setting extends SendCommand {
     public Setting() {
         commandName = "/setting";
-        buttonText = "Налаштування";
+        buttonText = "Setting";
     }
 
     @Override

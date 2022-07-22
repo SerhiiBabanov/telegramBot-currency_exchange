@@ -24,9 +24,9 @@ public class USD extends EditCommand{
         editMessageText.setChatId(chatSetting.getChatId());
         editMessageText.setMessageId(messageId);
         InlineKeyboardButton usd = new USD().getButton();
-        InlineKeyboardButton can = new CAN().getButton();
-        InlineKeyboardButton pzl = new PZL().getButton();
-        if (chatSetting.getValutes().contains(Valute.CAN)){
+        InlineKeyboardButton can = new CAD().getButton();
+        InlineKeyboardButton pzl = new PLZ().getButton();
+        if (chatSetting.getValutes().contains(Valute.CAD)){
             can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
         }
         if (chatSetting.getValutes().contains(Valute.USD)){
@@ -41,7 +41,7 @@ public class USD extends EditCommand{
             repository.add(chatSetting.getChatId(), chatSetting);
             usd.setText(EmojiParser.parseToUnicode(":white_check_mark:" + usd.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PZL)){
+        if (chatSetting.getValutes().contains(Valute.PLZ)){
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
 

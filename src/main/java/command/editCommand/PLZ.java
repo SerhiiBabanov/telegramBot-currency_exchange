@@ -11,10 +11,10 @@ import repository.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PZL extends EditCommand{
-    public PZL() {
-        commandName = "/setPZL";
-        buttonText = "PZL";
+public class PLZ extends EditCommand{
+    public PLZ() {
+        commandName = "/setPLZ";
+        buttonText = "PLZ";
     }
 
     @Override
@@ -23,25 +23,25 @@ public class PZL extends EditCommand{
         editMessageText.setChatId(chatSetting.getChatId());
         editMessageText.setMessageId(messageId);
         InlineKeyboardButton usd = new USD().getButton();
-        InlineKeyboardButton can = new CAN().getButton();
-        InlineKeyboardButton pzl = new PZL().getButton();
+        InlineKeyboardButton can = new CAD().getButton();
+        InlineKeyboardButton pzl = new PLZ().getButton();
 
         if (chatSetting.getValutes().contains(Valute.USD)){
             usd.setText(EmojiParser.parseToUnicode(":white_check_mark:" + usd.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.PZL)){
+        if (chatSetting.getValutes().contains(Valute.PLZ)){
             List<Valute> valutes = chatSetting.getValutes();
-            valutes.remove(Valute.PZL);
+            valutes.remove(Valute.PLZ);
             chatSetting.setValutes(valutes);
             repository.add(chatSetting.getChatId(), chatSetting);
         } else {
             List<Valute> valutes = chatSetting.getValutes();
-            valutes.add(Valute.PZL);
+            valutes.add(Valute.PLZ);
             chatSetting.setValutes(valutes);
             repository.add(chatSetting.getChatId(), chatSetting);
             pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
-        if (chatSetting.getValutes().contains(Valute.CAN)){
+        if (chatSetting.getValutes().contains(Valute.CAD)){
             can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
         }
 
