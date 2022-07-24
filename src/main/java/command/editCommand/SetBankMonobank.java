@@ -22,12 +22,15 @@ public class SetBankMonobank extends EditCommand{
         EditMessageText editMessageText = new EditMessageText();
         editMessageText.setChatId(chatSetting.getChatId());
         editMessageText.setMessageId(messageId);
+
         InlineKeyboardButton monobank = new SetBankMonobank().getButton();
         InlineKeyboardButton privatbank = new SetBankPrivatbank().getButton();
         InlineKeyboardButton nbu = new SetBankNBU().getButton();
+
         monobank.setText(EmojiParser.parseToUnicode(":white_check_mark:" + monobank.getText()));
         chatSetting.setBank(new Monobank());
         repository.add(chatSetting.getChatId(), chatSetting);
+
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();

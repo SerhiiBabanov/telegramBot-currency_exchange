@@ -60,6 +60,7 @@ public class ChatSetting {
 
         valuteList.add(Valute.USD);
         defaultSetting.setValutes(valuteList);
+        defaultSetting.setReminderTime(13);
         return defaultSetting;
     }
 

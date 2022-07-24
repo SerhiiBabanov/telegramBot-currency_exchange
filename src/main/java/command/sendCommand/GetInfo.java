@@ -8,6 +8,8 @@ import model.ChatSetting;
 import model.Valute;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,7 +43,7 @@ public class GetInfo extends SendCommand {
             for (Valute v : chatSetting.getValutes()
             ) {
                 Optional<Exchange> exchange = exchangeList.stream().filter(ex -> ex.ccy.equalsIgnoreCase(v.name())).findFirst();
-                exchange.ifPresent(ex -> result.append(ex).append(System.lineSeparator()));
+                exchange.ifPresent(ex -> result.append(getRoundDigitMessage(ex, chatSetting)).append(System.lineSeparator()));
             }
 
             sendMessage.setText(result.toString());
@@ -49,5 +51,15 @@ public class GetInfo extends SendCommand {
 
 
         return sendMessage;
+    }
+    String getRoundDigitMessage(Exchange exchange, ChatSetting chatSetting){
+        BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
+        BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
+        return "Exchange{" +
+                "ccy='" + exchange.getCcy() + '\'' +
+                ", base_ccy='" + exchange.getBase_ccy() + '\'' +
+                ", buy=" + buy +
+                ", sale=" + sale +
+                '}';
     }
 }
