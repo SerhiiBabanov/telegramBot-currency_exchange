@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dbbc193-e244-4e86-92d5-1fdc23f40a8e" name="Changes" comment="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6dbbc193-e244-4e86-92d5-1fdc23f40a8e" name="Changes" comment="Add schedule reminder every one hour. Add Round currency value logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/editCommand/SetBankMonobank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/editCommand/SetBankMonobank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/sendCommand/GetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/sendCommand/GetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ChatSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ChatSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/InMemoryMapRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/InMemoryMapRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/Repository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658095290952</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add schedule reminder every one hour. Add Round currency value logic">
+      <created>1658682740271</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1658682740271</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,17 +137,7 @@
     <MESSAGE value="Start project. Create main files, classes and packaging" />
     <MESSAGE value="add InMemoryMapRepository.java. Change return type of repository.getSetting to Optional" />
     <MESSAGE value="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="add default method for Command. Add Setting, Start. Add logic for callback data in TelegramBot.java" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/TelegramBot.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add schedule reminder every one hour. Add Round currency value logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add schedule reminder every one hour. Add Round currency value logic" />
   </component>
 </project>

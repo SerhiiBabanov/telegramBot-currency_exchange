@@ -28,6 +28,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.editCommands = editCommands;
         this.sendCommands = sendCommands;
         this.chatSettings = chatSettings;
+        startScheduledTasks();
+
+    }
+
+    private void startScheduledTasks() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         int pauseBeforeStartFirstTask = (60 - LocalTime.now().getMinute()) * 60;
 
@@ -52,7 +57,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         };
         executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 3600, TimeUnit.SECONDS);
-
     }
 
     @Override

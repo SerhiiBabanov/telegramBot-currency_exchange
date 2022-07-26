@@ -4,10 +4,10 @@ import model.ChatSetting;
 
 import java.util.*;
 
-public class InMemoryMapRepository implements Repository{
+public class InMemoryListRepository implements Repository{
     private final List<ChatSetting> chatSettings;
 
-    public InMemoryMapRepository() {
+    public InMemoryListRepository() {
         this.chatSettings = new ArrayList<>();
     }
 
