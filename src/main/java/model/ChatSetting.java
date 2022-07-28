@@ -1,6 +1,6 @@
 package model;
 
-import bank.privatbank.Privatbank;
+import banksUtils.privatbank.PrivatbankUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +11,18 @@ public class ChatSetting {
     int roundDigit;
     Bank bank;
     int reminderTime;
-    List<Valute> valutes;
+    List<Currency> currencies;
 
     public ChatSetting(long chatId) {
         this.chatId = chatId;
     }
 
-    public ChatSetting(long chatId, int roundDigit, Bank bank, int reminderTime, List<Valute> valutes) {
+    public ChatSetting(long chatId, int roundDigit, Bank bank, int reminderTime, List<Currency> currencies) {
         this.chatId = chatId;
         this.roundDigit = roundDigit;
         this.bank = bank;
         this.reminderTime = reminderTime;
-        this.valutes = valutes;
+        this.currencies = currencies;
     }
 
     public long getChatId() {
@@ -54,12 +54,12 @@ public class ChatSetting {
     }
     public static ChatSetting getDefault(long chatId){
         ChatSetting defaultSetting = new ChatSetting(chatId);
-        defaultSetting.setBank(new Privatbank());
+        defaultSetting.setBank(new PrivatbankUtils());
         defaultSetting.setRoundDigit(2);
-        List<Valute> valuteList = new ArrayList<>();
+        List<Currency> currencyList = new ArrayList<>();
 
-        valuteList.add(Valute.USD);
-        defaultSetting.setValutes(valuteList);
+        currencyList.add(Currency.USD);
+        defaultSetting.setValutes(currencyList);
         defaultSetting.setReminderTime(13);
         return defaultSetting;
     }
@@ -68,12 +68,12 @@ public class ChatSetting {
         this.reminderTime = reminderTime;
     }
 
-    public List<Valute> getValutes() {
-        return valutes;
+    public List<Currency> getValutes() {
+        return currencies;
     }
 
-    public void setValutes(List<Valute> valutes) {
-        this.valutes = valutes;
+    public void setValutes(List<Currency> currencies) {
+        this.currencies = currencies;
     }
 
     @Override

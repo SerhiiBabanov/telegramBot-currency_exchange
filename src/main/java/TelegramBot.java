@@ -1,5 +1,5 @@
-import command.editCommand.EditCommand;
-import command.sendCommand.SendCommand;
+import model.EditCommand;
+import model.SendCommand;
 import model.ChatSetting;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

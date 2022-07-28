@@ -1,7 +1,5 @@
 package model;
 
-import bank.privatbank.Exchange;
-
 import java.util.List;
 
 public abstract class Bank {
