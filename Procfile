@@ -1,1 +1,1 @@
-web: java AppLauncher
+web: java build/AppLauncher
