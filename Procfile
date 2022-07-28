@@ -1,1 +1,1 @@
-web: java build/AppLauncher
+web: java build//libs/AppLauncher.jar
