@@ -1,1 +1,1 @@
-web: sh target/bin/AppLauncher
+web: sh target/bin/AppLauncher.jar
