@@ -1,1 +1,1 @@
-web: java build/libs/AppLauncher.jar
+web: java -jar build/server/webapp-runner-*.jar build/libs/*.war
