@@ -16,7 +16,7 @@ import java.util.List;
 public class SetBankNBU extends EditCommand {
     public SetBankNBU() {
         commandName = "/setNBU";
-        buttonText = "Set Bank NBU";
+        buttonText = "НБУ";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class SetBankNBU extends EditCommand {
         repository.add(chatSetting.getChatId(), chatSetting);
 
         return EditMessageText.builder()
-                .text("Your bank - NBU")
+                .text("Ваш банк - НБУ")
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
                 .chatId(chatSetting.getChatId())
                 .messageId(messageId)

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class ReminderSetting extends SendCommand {
     public ReminderSetting() {
         commandName = "/reminderSetting";
-        buttonText = "reminderSetting";
+        buttonText = "Час сповіщень";
     }
 
     @Override

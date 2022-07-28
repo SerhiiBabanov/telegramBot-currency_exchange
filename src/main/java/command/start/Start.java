@@ -1,9 +1,9 @@
 package command.start;
 
-import model.SendCommand;
 import command.info.GetInfo;
 import command.setting.Setting;
 import model.ChatSetting;
+import model.SendCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -19,19 +19,15 @@ public class Start extends SendCommand {
 
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatSetting.getChatId());
-        sendMessage.setText("You send start");
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();
-        rowInLine0.add(new GetInfo().getButton());
-        rowsInLine.add(rowInLine0);
-        List<InlineKeyboardButton> rowInLine1 = new ArrayList<>();
-        rowInLine1.add(new Setting().getButton());
-        rowsInLine.add(rowInLine1);
-        inlineKeyboardMarkup.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-        return sendMessage;
+
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        buttons.add(List.of(new GetInfo().getButton()));
+        buttons.add(List.of(new Setting().getButton()));
+
+        return SendMessage.builder()
+                .text("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют")
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
+                .chatId(chatSetting.getChatId())
+                .build();
     }
 }

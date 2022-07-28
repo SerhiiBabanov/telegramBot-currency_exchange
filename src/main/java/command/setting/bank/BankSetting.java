@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class BankSetting extends SendCommand {
     public BankSetting() {
         commandName = "/bankSetting";
-        buttonText = "BankSetting";
+        buttonText = "Банк";
     }
 
     @Override

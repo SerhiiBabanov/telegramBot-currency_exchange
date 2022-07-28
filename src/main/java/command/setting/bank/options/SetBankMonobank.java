@@ -15,7 +15,7 @@ import java.util.List;
 public class SetBankMonobank extends EditCommand {
     public SetBankMonobank() {
         commandName = "/setMonobank";
-        buttonText = "Set Bank Monobank";
+        buttonText = "Монобанк";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class SetBankMonobank extends EditCommand {
         repository.add(chatSetting.getChatId(), chatSetting);
 
         return EditMessageText.builder()
-                .text("Your bank - Monobank")
+                .text("Ваш банк - Монобанк")
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
                 .chatId(chatSetting.getChatId())
                 .messageId(messageId)

@@ -18,27 +18,27 @@ import java.util.Optional;
 public class GetInfo extends SendCommand {
     public GetInfo() {
         commandName = "/getInfo";
-        buttonText = "GetInfo";
+        buttonText = "Отримати інфо";
     }
 
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatSetting.getChatId());
-        sendMessage.setText("Results not found");
+        sendMessage.setText("Результати не знайдені");
         StringBuilder result = new StringBuilder();
 
         List<Exchange> exchangeList = null;
         if (chatSetting.getBank().toString().equals("Monobank")) {
-            result.append("Monobank");
+            result.append("Курс в Монобанк").append(System.lineSeparator());
             exchangeList = new MonobankUtils().getExchangeList();
         }
         if (chatSetting.getBank().toString().equals("NBU")) {
-            result.append("NBU");
+            result.append("Курс в НБУ").append(System.lineSeparator());
             exchangeList = new NBUUtils().getExchangeList();
         }
         if (chatSetting.getBank().toString().equals("/privatbank")) {
-            result.append("Privatbank");
+            result.append("Курс в ПриватБанк").append(System.lineSeparator());
             exchangeList = new PrivatbankUtils().getExchangeList();
         }
 
@@ -61,11 +61,8 @@ public class GetInfo extends SendCommand {
     String getExchangeAfterRoundResults(Exchange exchange, ChatSetting chatSetting) {
         BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
-        return "Exchange{" +
-                "ccy='" + exchange.getCcy() + '\'' +
-                ", base_ccy='" + exchange.getBase_ccy() + '\'' +
-                ", buy=" + buy +
-                ", sale=" + sale +
-                '}';
+        return exchange.ccy + '\\' + exchange.base_ccy + System.lineSeparator() +
+                "Покупка:" + buy +
+                "Продажа:" + sale + System.lineSeparator();
     }
 }

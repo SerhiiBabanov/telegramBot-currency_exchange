@@ -16,7 +16,7 @@ import java.util.List;
 public class SetBankPrivatbank extends EditCommand {
     public SetBankPrivatbank() {
         commandName = "/setPrivatbank";
-        buttonText = "Set PrivatBank";
+        buttonText = "ПриватБанк";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class SetBankPrivatbank extends EditCommand {
         repository.add(chatSetting.getChatId(), chatSetting);
 
         return EditMessageText.builder()
-                .text("Your bank - PrivatBank")
+                .text("Ваш банк - ПриватБанк")
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
                 .chatId(chatSetting.getChatId())
                 .messageId(messageId)

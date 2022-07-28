@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class CurrencySetting extends SendCommand {
     public CurrencySetting() {
         commandName = "/valuteSetting";
-        buttonText = "Valute setting";
+        buttonText = "Валюта";
     }
 
     @Override

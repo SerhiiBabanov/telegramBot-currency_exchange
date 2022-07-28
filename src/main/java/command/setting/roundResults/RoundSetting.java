@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class RoundSetting extends SendCommand {
     public RoundSetting() {
         commandName = "/roundDigitSetting";
-        buttonText = "RoundDigitSetting";
+        buttonText = "Кількість знаків після коми";
     }
 
     @Override

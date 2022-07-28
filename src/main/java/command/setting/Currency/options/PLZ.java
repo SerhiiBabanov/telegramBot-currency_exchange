@@ -60,7 +60,7 @@ public class PLZ extends EditCommand {
         rowsInLine.add(rowInLine2);
         inlineKeyboardMarkup.setKeyboard(rowsInLine);
         editMessageText.setReplyMarkup(inlineKeyboardMarkup);
-        editMessageText.setText("Change setting");
+        editMessageText.setText("Зміни збережено");
         return editMessageText;
     }
 }

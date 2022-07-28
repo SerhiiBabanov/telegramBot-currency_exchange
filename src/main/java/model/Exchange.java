@@ -65,11 +65,8 @@ public class Exchange {
 
     @Override
     public String toString() {
-        return "Exchange{" +
-                "ccy='" + ccy + '\'' +
-                ", base_ccy='" + base_ccy + '\'' +
-                ", buy=" + buy +
-                ", sale=" + sale +
-                '}';
+        return  ccy + '\'' + base_ccy + System.lineSeparator() +
+                "Покупка:" + buy +
+                "Продажа:" + sale + System.lineSeparator();
     }
 }
