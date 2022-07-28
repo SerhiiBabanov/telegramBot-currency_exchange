@@ -16,7 +16,7 @@ import java.util.List;
 public class Setting extends SendCommand {
     public Setting() {
         commandName = "/setting";
-        buttonText = "Setting";
+        buttonText = "Налаштування";
     }
 
     @Override
