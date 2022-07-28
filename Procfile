@@ -1,1 +1,1 @@
-web: java build/libs/goit-java-telegramBot.jar
+web: java -jar build/libs/goit-java-telegramBot-1.0.jar
