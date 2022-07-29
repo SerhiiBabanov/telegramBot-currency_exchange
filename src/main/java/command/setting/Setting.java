@@ -19,18 +19,14 @@ public class Setting extends SendCommand {
         buttonText = "Налаштування";
     }
 
+
     @Override
-    public SendMessage execute(ChatSetting chatSetting) {
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
         settingsButtons.add(List.of(new RoundSetting().getButton()));
         settingsButtons.add(List.of(new BankSetting().getButton()));
         settingsButtons.add(List.of(new CurrencySetting().getButton()));
         settingsButtons.add(List.of(new ReminderSetting().getButton()));
-
-        return SendMessage.builder()
-                .text(buttonText)
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
-                .chatId(chatSetting.getChatId())
-                .build();
+        return settingsButtons;
     }
 }

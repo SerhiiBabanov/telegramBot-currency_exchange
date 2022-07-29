@@ -15,25 +15,12 @@ public class RoundToTwo extends EditCommand {
     public RoundToTwo() {
         commandName = "/roundDigitSettingTwo";
         buttonText = "2";
+        commandResultText = "Your round - 2";
     }
 
     @Override
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
-        List<List<InlineKeyboardButton>> banksButtons = new ArrayList<>();
-        InlineKeyboardButton round = new RoundToTwo().getButton();
-        round.setText(EmojiParser.parseToUnicode(":white_check_mark:" + round.getText()));
-        banksButtons.add(List.of(round));
-        banksButtons.add(List.of(new RoundToTree().getButton()));
-        banksButtons.add(List.of(new RoundToFour().getButton()));
-
+    public void setSetting(ChatSetting chatSetting, Repository repository) {
         chatSetting.setRoundDigit(2);
         repository.add(chatSetting.getChatId(), chatSetting);
-
-        return EditMessageText.builder()
-                .text("Your round - 2")
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
-                .chatId(chatSetting.getChatId())
-                .messageId(messageId)
-                .build();
     }
 }

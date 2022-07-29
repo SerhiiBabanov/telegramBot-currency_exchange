@@ -22,10 +22,8 @@ public class CurrencySetting extends SendCommand {
         commandName = "/valuteSetting";
         buttonText = "Валюта";
     }
-
     @Override
-    public SendMessage execute(ChatSetting chatSetting) {
-//
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
         settingsButtons.add(List.of(new USD().getButton()));
         settingsButtons.add(List.of(new CAD().getButton()));
@@ -40,11 +38,6 @@ public class CurrencySetting extends SendCommand {
                 })
                 .map(Arrays::asList)
                 .collect(Collectors.toList());
-
-        return SendMessage.builder()
-                .text(buttonText)
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
-                .chatId(chatSetting.getChatId())
-                .build();
+        return settingsButtons;
     }
 }

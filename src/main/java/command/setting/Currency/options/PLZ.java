@@ -16,51 +16,18 @@ public class PLZ extends EditCommand {
     public PLZ() {
         commandName = "/setPLZ";
         buttonText = "PLZ";
+        commandResultText = "Зміни збережено";
     }
 
     @Override
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
-        EditMessageText editMessageText = new EditMessageText();
-        editMessageText.setChatId(chatSetting.getChatId());
-        editMessageText.setMessageId(messageId);
-        InlineKeyboardButton usd = new USD().getButton();
-        InlineKeyboardButton can = new CAD().getButton();
-        InlineKeyboardButton pzl = new PLZ().getButton();
-
-        if (chatSetting.getValutes().contains(Currency.USD)){
-            usd.setText(EmojiParser.parseToUnicode(":white_check_mark:" + usd.getText()));
-        }
+    public void setSetting(ChatSetting chatSetting, Repository repository) {
+        List<Currency> currencies = chatSetting.getValutes();
         if (chatSetting.getValutes().contains(Currency.PLZ)){
-            List<Currency> currencies = chatSetting.getValutes();
             currencies.remove(Currency.PLZ);
-            chatSetting.setValutes(currencies);
-            repository.add(chatSetting.getChatId(), chatSetting);
         } else {
-            List<Currency> currencies = chatSetting.getValutes();
             currencies.add(Currency.PLZ);
-            chatSetting.setValutes(currencies);
-            repository.add(chatSetting.getChatId(), chatSetting);
-            pzl.setText(EmojiParser.parseToUnicode(":white_check_mark:" + pzl.getText()));
         }
-        if (chatSetting.getValutes().contains(Currency.CAD)){
-            can.setText(EmojiParser.parseToUnicode(":white_check_mark:" + can.getText()));
-        }
-
-
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        List<InlineKeyboardButton> rowInLine0 = new ArrayList<>();
-        rowInLine0.add(usd);
-        rowsInLine.add(rowInLine0);
-        List<InlineKeyboardButton> rowInLine1 = new ArrayList<>();
-        rowInLine1.add(can);
-        rowsInLine.add(rowInLine1);
-        List<InlineKeyboardButton> rowInLine2 = new ArrayList<>();
-        rowInLine2.add(pzl);
-        rowsInLine.add(rowInLine2);
-        inlineKeyboardMarkup.setKeyboard(rowsInLine);
-        editMessageText.setReplyMarkup(inlineKeyboardMarkup);
-        editMessageText.setText("Зміни збережено");
-        return editMessageText;
+        chatSetting.setValutes(currencies);
+        repository.add(chatSetting.getChatId(), chatSetting);
     }
 }

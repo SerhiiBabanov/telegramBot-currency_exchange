@@ -20,14 +20,18 @@ public class Start extends SendCommand {
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
 
+        return SendMessage.builder()
+                .text("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют")
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(getKeyboard(chatSetting)).build())
+                .chatId(chatSetting.getChatId())
+                .build();
+    }
+
+    @Override
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         buttons.add(List.of(new GetInfo().getButton()));
         buttons.add(List.of(new Setting().getButton()));
-
-        return SendMessage.builder()
-                .text("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют")
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
-                .chatId(chatSetting.getChatId())
-                .build();
+        return buttons;
     }
 }

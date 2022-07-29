@@ -16,26 +16,12 @@ public class SetBankMonobank extends EditCommand {
     public SetBankMonobank() {
         commandName = "/setMonobank";
         buttonText = "Монобанк";
+        commandResultText = "Ваш банк - Монобанк";
     }
 
     @Override
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
-
-        List<List<InlineKeyboardButton>> banksButtons = new ArrayList<>();
-        InlineKeyboardButton monobank = new SetBankMonobank().getButton();
-        monobank.setText(EmojiParser.parseToUnicode(":white_check_mark:" + monobank.getText()));
-        banksButtons.add(List.of(monobank));
-        banksButtons.add(List.of(new SetBankPrivatbank().getButton()));
-        banksButtons.add(List.of(new SetBankNBU().getButton()));
-
+    public void setSetting(ChatSetting chatSetting, Repository repository) {
         chatSetting.setBank(new MonobankUtils());
         repository.add(chatSetting.getChatId(), chatSetting);
-
-        return EditMessageText.builder()
-                .text("Ваш банк - Монобанк")
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
-                .chatId(chatSetting.getChatId())
-                .messageId(messageId)
-                .build();
     }
 }

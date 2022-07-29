@@ -8,6 +8,7 @@ import model.ChatSetting;
 import model.Currency;
 import model.Exchange;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -58,11 +59,16 @@ public class GetInfo extends SendCommand {
         return sendMessage;
     }
 
+    @Override
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
+        return null;
+    }
+
     String getExchangeAfterRoundResults(Exchange exchange, ChatSetting chatSetting) {
         BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         return exchange.ccy + '\\' + exchange.base_ccy + System.lineSeparator() +
-                "Покупка:" + buy +
+                "Покупка:" + buy + System.lineSeparator() +
                 "Продажа:" + sale + System.lineSeparator();
     }
 }

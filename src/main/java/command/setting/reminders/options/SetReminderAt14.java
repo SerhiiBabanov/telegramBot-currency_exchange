@@ -16,37 +16,12 @@ public class SetReminderAt14 extends EditCommand {
     public SetReminderAt14() {
         commandName = "/SetReminderAt14";
         buttonText = "14";
+        commandResultText = "Your time - 14";
     }
 
     @Override
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
-        List<List<InlineKeyboardButton>> reminderButtons = new ArrayList<>();
-        InlineKeyboardButton check = new SetReminderAt14().getButton();
-        check.setText(EmojiParser.parseToUnicode(":white_check_mark:" + check.getText()));
-        reminderButtons.add(List.of(
-                new SetReminderAt9().getButton(),
-                new SetReminderAt10().getButton(),
-                new SetReminderAt11().getButton(),
-                new SetReminderAt12().getButton()));
-        reminderButtons.add(List.of(
-                new SetReminderAt13().getButton(),
-                check,
-                new SetReminderAt15().getButton(),
-                new SetReminderAt16().getButton()));
-        reminderButtons.add(List.of(
-                new SetReminderAt17().getButton(),
-                new SetReminderAt18().getButton(),
-                new SetReminderAtNone().getButton()
-        ));
-
+    public void setSetting(ChatSetting chatSetting, Repository repository) {
         chatSetting.setReminderTime(14);
         repository.add(chatSetting.getChatId(), chatSetting);
-
-        return EditMessageText.builder()
-                .text("Your time - 14")
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(reminderButtons).build())
-                .chatId(chatSetting.getChatId())
-                .messageId(messageId)
-                .build();
     }
 }

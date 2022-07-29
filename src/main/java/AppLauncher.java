@@ -1,5 +1,6 @@
 import command.setting.reminders.ReminderSetting;
 import command.setting.reminders.options.*;
+import model.ChatSetting;
 import model.EditCommand;
 import model.SendCommand;
 import command.info.GetInfo;
@@ -29,7 +30,8 @@ import java.util.List;
 public class AppLauncher {
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        Repository settingsChat = new InMemoryListRepository();
+        Repository chatSettings = new InMemoryListRepository();
+        //Repository chatSettings = new InFileJsonRepository();
 
         List<SendCommand> sendCommands = new ArrayList<>();
         addSendCommands(sendCommands);
@@ -39,7 +41,7 @@ public class AppLauncher {
         // Register our bot
 
         try {
-            telegramBotsApi.registerBot(new TelegramBot(editCommands, sendCommands, settingsChat));
+            telegramBotsApi.registerBot(new TelegramBot(editCommands, sendCommands, chatSettings));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -77,4 +79,5 @@ public class AppLauncher {
         sendCommands.add(new CurrencySetting());
         sendCommands.add(new ReminderSetting());
     }
+
 }

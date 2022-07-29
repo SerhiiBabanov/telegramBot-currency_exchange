@@ -23,9 +23,9 @@ public class RoundSetting extends SendCommand {
         buttonText = "Кількість знаків після коми";
     }
 
-    @Override
-    public SendMessage execute(ChatSetting chatSetting) {
 
+    @Override
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
         settingsButtons.add(List.of(new RoundToTwo().getButton()));
         settingsButtons.add(List.of(new RoundToTree().getButton()));
@@ -40,11 +40,6 @@ public class RoundSetting extends SendCommand {
                 })
                 .map(Arrays::asList)
                 .collect(Collectors.toList());
-
-        return SendMessage.builder()
-                .text(buttonText)
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(settingsButtons).build())
-                .chatId(chatSetting.getChatId())
-                .build();
+        return settingsButtons;
     }
 }

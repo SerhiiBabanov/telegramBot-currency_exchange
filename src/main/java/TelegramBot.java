@@ -30,6 +30,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.chatSettings = chatSettings;
         startScheduledTasks();
 
+
     }
 
     private void startScheduledTasks() {

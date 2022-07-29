@@ -19,26 +19,12 @@ public class RoundToFour extends EditCommand {
     public RoundToFour() {
         commandName = "/roundDigitSettingFour";
         buttonText = "4";
+        commandResultText = "Your round - 4";
     }
 
     @Override
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
-        List<List<InlineKeyboardButton>> banksButtons = new ArrayList<>();
-        InlineKeyboardButton round = new RoundToFour().getButton();
-        round.setText(EmojiParser.parseToUnicode(":white_check_mark:" + round.getText()));
-        banksButtons.add(List.of(new RoundToTwo().getButton()));
-        banksButtons.add(List.of(new RoundToTree().getButton()));
-        banksButtons.add(List.of(round));
-
+    public void setSetting(ChatSetting chatSetting, Repository repository) {
         chatSetting.setRoundDigit(4);
         repository.add(chatSetting.getChatId(), chatSetting);
-
-        return EditMessageText.builder()
-                .text("Your round - 4")
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(banksButtons).build())
-                .chatId(chatSetting.getChatId())
-                .messageId(messageId)
-                .build();
-
     }
 }
