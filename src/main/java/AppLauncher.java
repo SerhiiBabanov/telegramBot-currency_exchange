@@ -28,17 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppLauncher {
+    private static List<SendCommand> sendCommands;
+
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        Repository chatSettings = new InMemoryListRepository();
-        //Repository chatSettings = new InFileJsonRepository();
 
-        List<SendCommand> sendCommands = new ArrayList<>();
+        Repository chatSettings = new InMemoryListRepository();
+
+        sendCommands = new ArrayList<>();
         addSendCommands(sendCommands);
 
         List<EditCommand> editCommands = new ArrayList<>();
         addEditCommands(editCommands);
-        // Register our bot
 
         try {
             telegramBotsApi.registerBot(new TelegramBot(editCommands, sendCommands, chatSettings));
@@ -48,36 +49,36 @@ public class AppLauncher {
     }
 
     private static void addEditCommands(List<EditCommand> editCommands) {
-        editCommands.add(new RoundToTwo());
-        editCommands.add(new RoundToTree());
-        editCommands.add(new RoundToFour());
-        editCommands.add(new SetBankMonobank());
-        editCommands.add(new SetBankNBU());
-        editCommands.add(new SetBankPrivatbank());
-        editCommands.add(new PLZ());
-        editCommands.add(new USD());
-        editCommands.add(new CAD());
-        editCommands.add(new SetReminderAt9());
-        editCommands.add(new SetReminderAt10());
-        editCommands.add(new SetReminderAt11());
-        editCommands.add(new SetReminderAt12());
-        editCommands.add(new SetReminderAt13());
-        editCommands.add(new SetReminderAt14());
-        editCommands.add(new SetReminderAt15());
-        editCommands.add(new SetReminderAt16());
-        editCommands.add(new SetReminderAt17());
-        editCommands.add(new SetReminderAt18());
-        editCommands.add(new SetReminderAtNone());
+        editCommands.add(new RoundToTwo(sendCommands.get(2)));
+        editCommands.add(new RoundToTree(sendCommands.get(2)));
+        editCommands.add(new RoundToFour(sendCommands.get(2)));
+        editCommands.add(new SetBankMonobank(sendCommands.get(4)));
+        editCommands.add(new SetBankNBU(sendCommands.get(4)));
+        editCommands.add(new SetBankPrivatbank(sendCommands.get(4)));
+        editCommands.add(new PLZ(sendCommands.get(5)));
+        editCommands.add(new USD(sendCommands.get(5)));
+        editCommands.add(new CAD(sendCommands.get(5)));
+        editCommands.add(new SetReminderAt9(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt10(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt11(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt12(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt13(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt14(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt15(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt16(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt17(sendCommands.get(6)));
+        editCommands.add(new SetReminderAt18(sendCommands.get(6)));
+        editCommands.add(new SetReminderAtNone(sendCommands.get(6)));
     }
 
     private static void addSendCommands(List<SendCommand> sendCommands) {
-        sendCommands.add(new Start());
-        sendCommands.add(new Setting());
-        sendCommands.add(new RoundSetting());
-        sendCommands.add(new GetInfo());
-        sendCommands.add(new BankSetting());
-        sendCommands.add(new CurrencySetting());
-        sendCommands.add(new ReminderSetting());
+        sendCommands.add(new Start());              //0
+        sendCommands.add(new Setting());            //1
+        sendCommands.add(new RoundSetting());       //2
+        sendCommands.add(new GetInfo());            //3
+        sendCommands.add(new BankSetting());        //4
+        sendCommands.add(new CurrencySetting());    //5
+        sendCommands.add(new ReminderSetting());    //6
     }
 
 }

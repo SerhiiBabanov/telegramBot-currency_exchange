@@ -20,21 +20,21 @@ public class ReminderSetting extends SendCommand {
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> reminderButtons = new ArrayList<>();
         reminderButtons.add(List.of(
-                new SetReminderAt9().getButton(),
-                new SetReminderAt10().getButton(),
-                new SetReminderAt11().getButton()));
+                new SetReminderAt9(this).getButton(),
+                new SetReminderAt10(this).getButton(),
+                new SetReminderAt11(this).getButton()));
         reminderButtons.add(List.of(
-                new SetReminderAt12().getButton(),
-                new SetReminderAt13().getButton(),
-                new SetReminderAt14().getButton()));
+                new SetReminderAt12(this).getButton(),
+                new SetReminderAt13(this).getButton(),
+                new SetReminderAt14(this).getButton()));
         reminderButtons.add(List.of(
-                new SetReminderAt15().getButton(),
-                new SetReminderAt16().getButton(),
+                new SetReminderAt15(this).getButton(),
+                new SetReminderAt16(this).getButton(),
 
-                new SetReminderAt17().getButton()));
+                new SetReminderAt17(this).getButton()));
         reminderButtons.add(List.of(
-                new SetReminderAt18().getButton(),
-                new SetReminderAtNone().getButton()
+                new SetReminderAt18(this).getButton(),
+                new SetReminderAtNone(this).getButton()
         ));
         for (List<InlineKeyboardButton> row : reminderButtons
         ) {

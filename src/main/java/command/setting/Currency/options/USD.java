@@ -1,19 +1,16 @@
 package command.setting.Currency.options;
 
-import com.vdurmont.emoji.EmojiParser;
 import model.EditCommand;
 import model.ChatSetting;
 import model.Currency;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import model.SendCommand;
 import repository.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class USD extends EditCommand {
-    public USD() {
+    public USD(SendCommand parentCommand) {
+        super(parentCommand);
         commandName = "/setUSD";
         buttonText = "USD";
         commandResultText = "Зміни збережено";

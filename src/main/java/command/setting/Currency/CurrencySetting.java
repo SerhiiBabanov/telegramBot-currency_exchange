@@ -25,9 +25,9 @@ public class CurrencySetting extends SendCommand {
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
-        settingsButtons.add(List.of(new USD().getButton()));
-        settingsButtons.add(List.of(new CAD().getButton()));
-        settingsButtons.add(List.of(new PLZ().getButton()));
+        settingsButtons.add(List.of(new USD(this).getButton()));
+        settingsButtons.add(List.of(new CAD(this).getButton()));
+        settingsButtons.add(List.of(new PLZ(this).getButton()));
 
         settingsButtons = settingsButtons.stream()
                 .flatMap(Collection::stream)

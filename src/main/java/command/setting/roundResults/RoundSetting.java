@@ -27,9 +27,9 @@ public class RoundSetting extends SendCommand {
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
-        settingsButtons.add(List.of(new RoundToTwo().getButton()));
-        settingsButtons.add(List.of(new RoundToTree().getButton()));
-        settingsButtons.add(List.of(new RoundToFour().getButton()));
+        settingsButtons.add(List.of(new RoundToTwo(this).getButton()));
+        settingsButtons.add(List.of(new RoundToTree(this).getButton()));
+        settingsButtons.add(List.of(new RoundToFour(this).getButton()));
 
         settingsButtons = settingsButtons.stream()
                 .flatMap(Collection::stream)

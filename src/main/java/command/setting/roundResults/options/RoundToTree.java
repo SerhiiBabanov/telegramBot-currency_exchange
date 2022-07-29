@@ -1,18 +1,13 @@
 package command.setting.roundResults.options;
 
-import com.vdurmont.emoji.EmojiParser;
 import model.EditCommand;
 import model.ChatSetting;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import model.SendCommand;
 import repository.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RoundToTree extends EditCommand {
-    public RoundToTree() {
+    public RoundToTree(SendCommand parentCommand) {
+        super(parentCommand);
         commandName = "/roundDigitSettingTree";
         buttonText = "3";
         commandResultText = "Your round - 3";

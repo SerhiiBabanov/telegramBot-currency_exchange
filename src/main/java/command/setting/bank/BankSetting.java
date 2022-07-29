@@ -24,9 +24,9 @@ public class BankSetting extends SendCommand {
 
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
-        settingsButtons.add(List.of(new SetBankMonobank().getButton()));
-        settingsButtons.add(List.of(new SetBankPrivatbank().getButton()));
-        settingsButtons.add(List.of(new SetBankNBU().getButton()));
+        settingsButtons.add(List.of(new SetBankMonobank(this).getButton()));
+        settingsButtons.add(List.of(new SetBankPrivatbank(this).getButton()));
+        settingsButtons.add(List.of(new SetBankNBU(this).getButton()));
 
         settingsButtons = settingsButtons.stream()
                 .flatMap(Collection::stream)
