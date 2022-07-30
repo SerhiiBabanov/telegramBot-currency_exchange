@@ -1,5 +1,8 @@
 package model;
 
+import banksUtils.monobank.MonobankUtils;
+import banksUtils.nbu.NBUUtils;
+import banksUtils.privatbank.PrivatbankUtils;
 import model.EditCommand;
 import model.SendCommand;
 import model.ChatSetting;
@@ -31,6 +34,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         TelegramBot.sendCommands = sendCommands;
         this.chatSettings = chatSettings;
         startScheduledTasks();
+        startUpdateBankInfoTask();
 
 
     }
@@ -60,6 +64,17 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         };
         executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 3600, TimeUnit.SECONDS);
+    }
+    private void startUpdateBankInfoTask() {
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        int pauseBeforeStartFirstTask = 60;
+
+        Runnable task1 = () -> {
+            MonobankUtils.updateExchangeList();
+            PrivatbankUtils.updateExchangeList();
+            NBUUtils.updateExchangeList();
+        };
+        executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 60, TimeUnit.SECONDS);
     }
 
     public static List<EditCommand> getEditCommands() {
