@@ -6,11 +6,12 @@ import model.SendCommand;
 import repository.Repository;
 
 public class SetReminderAtNone extends EditCommand {
+    protected static final String COMMAND_NAME = "/SetReminderAt25";
+    protected static final String BUTTON_TEXT = "Вимкнути сповіщення";
+    protected static final String COMMAND_RESULT_TEXT = "Сповіщення вимкнені";
+
     public SetReminderAtNone(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/SetReminderAtNone";
-        buttonText = "Turn off reminder";
-        commandResultText = "Reminder disabled";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

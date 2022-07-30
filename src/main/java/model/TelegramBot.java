@@ -1,3 +1,5 @@
+package model;
+
 import model.EditCommand;
 import model.SendCommand;
 import model.ChatSetting;
@@ -18,15 +20,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    private final List<EditCommand> editCommands;
-    private final List<SendCommand> sendCommands;
+    private static  List<EditCommand> editCommands = null;
+    private static  List<SendCommand> sendCommands = null;
 
     public final Repository chatSettings;
 
     public TelegramBot(List<EditCommand> editCommands, List<SendCommand> sendCommands, Repository chatSettings) {
         super();
-        this.editCommands = editCommands;
-        this.sendCommands = sendCommands;
+        TelegramBot.editCommands = editCommands;
+        TelegramBot.sendCommands = sendCommands;
         this.chatSettings = chatSettings;
         startScheduledTasks();
 
@@ -58,6 +60,14 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         };
         executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 3600, TimeUnit.SECONDS);
+    }
+
+    public static List<EditCommand> getEditCommands() {
+        return editCommands;
+    }
+
+    public static List<SendCommand> getSendCommands() {
+        return sendCommands;
     }
 
     @Override

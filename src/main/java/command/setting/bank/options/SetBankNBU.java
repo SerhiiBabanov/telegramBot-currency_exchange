@@ -7,11 +7,12 @@ import model.SendCommand;
 import repository.Repository;
 
 public class SetBankNBU extends EditCommand {
+    protected static final String COMMAND_NAME = "/setNBU";
+    protected static final String BUTTON_TEXT = "НБУ";
+    protected static final String COMMAND_RESULT_TEXT = "Ваш банк - НБУ";
+
     public SetBankNBU(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/setNBU";
-        buttonText = "НБУ";
-        commandResultText = "Ваш банк - НБУ";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

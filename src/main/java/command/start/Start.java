@@ -12,16 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Start extends SendCommand {
+    protected static final String COMMAND_NAME = "/start";
+    protected static final String BUTTON_TEXT = "/start";
+    protected static final String COMMAND_RESULT_TEXT = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют";
+
     public Start() {
-        commandName = "/start";
-        buttonText = "/start";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
 
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
 
         return SendMessage.builder()
-                .text("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют")
+                .text(commandResultText)
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(getKeyboard(chatSetting)).build())
                 .chatId(chatSetting.getChatId())
                 .build();
