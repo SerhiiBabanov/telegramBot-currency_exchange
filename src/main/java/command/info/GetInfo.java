@@ -17,9 +17,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class GetInfo extends SendCommand {
+    protected static final String COMMAND_NAME = "/getInfo";
+    protected static final String BUTTON_TEXT = "Отримати інфо";
+    protected static final String COMMAND_RESULT_TEXT = "EmptyText";
+
     public GetInfo() {
-        commandName = "/getInfo";
-        buttonText = "Отримати інфо";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
 
     @Override

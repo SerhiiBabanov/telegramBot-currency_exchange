@@ -9,11 +9,12 @@ import repository.Repository;
 import java.util.List;
 
 public class USD extends EditCommand {
+    protected static final String COMMAND_NAME = "/setUSD";
+    protected static final String BUTTON_TEXT = "USD";
+    protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
+
     public USD(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/setUSD";
-        buttonText = "USD";
-        commandResultText = "Зміни збережено";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

@@ -9,11 +9,12 @@ import repository.Repository;
 import java.util.List;
 
 public class CAD extends EditCommand {
+    protected static final String COMMAND_NAME = "/setCAD";
+    protected static final String BUTTON_TEXT = "CAD";
+    protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
+
     public CAD(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/setCAD";
-        buttonText = "CAD";
-        commandResultText = "Зміни збережено";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
 

@@ -2,11 +2,13 @@ package command.setting.roundResults;
 
 
 import com.vdurmont.emoji.EmojiParser;
+import model.EditCommand;
 import model.SendCommand;
 import command.setting.roundResults.options.RoundToFour;
 import command.setting.roundResults.options.RoundToTree;
 import command.setting.roundResults.options.RoundToTwo;
 import model.ChatSetting;
+import model.TelegramBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -18,19 +20,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RoundSetting extends SendCommand {
+    protected static final String COMMAND_NAME = "/roundDigitSetting";
+    protected static final String BUTTON_TEXT = "Кількість знаків після коми";
+    protected static final String COMMAND_RESULT_TEXT = "EmptyText";
+
     public RoundSetting() {
-        commandName = "/roundDigitSetting";
-        buttonText = "Кількість знаків після коми";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
 
 
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
-        settingsButtons.add(List.of(new RoundToTwo(this).getButton()));
-        settingsButtons.add(List.of(new RoundToTree(this).getButton()));
-        settingsButtons.add(List.of(new RoundToFour(this).getButton()));
-
+        for (EditCommand command: TelegramBot.getEditCommands()){
+            if (command.getParentCommand().getCommandName().equals(this.commandName)){
+                settingsButtons.add(List.of(command.getButton()));
+            }
+        }
         settingsButtons = settingsButtons.stream()
                 .flatMap(Collection::stream)
                 .peek(button -> {

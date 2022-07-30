@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Setting extends SendCommand {
+    protected static final String COMMAND_NAME = "/setting";
+    protected static final String BUTTON_TEXT = "Налаштування";
+    protected static final String COMMAND_RESULT_TEXT = "EmptyText";
+
     public Setting() {
-        commandName = "/setting";
-        buttonText = "Налаштування";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
 
 

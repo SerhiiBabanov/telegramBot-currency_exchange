@@ -6,11 +6,12 @@ import model.SendCommand;
 import repository.Repository;
 
 public class SetReminderAt12 extends EditCommand {
+    protected static final String COMMAND_NAME = "/SetReminderAt12";
+    protected static final String BUTTON_TEXT = "12";
+    protected static final String COMMAND_RESULT_TEXT = "Ваш час сповіщень - 12 година";
+
     public SetReminderAt12(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/SetReminderAt12";
-        buttonText = "12";
-        commandResultText = "Your time - 12";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

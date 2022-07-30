@@ -6,11 +6,12 @@ import model.SendCommand;
 import repository.Repository;
 
 public class RoundToTree extends EditCommand {
+    protected static final String COMMAND_NAME = "/roundDigitSettingTree";
+    protected static final String BUTTON_TEXT = "3";
+    protected static final String COMMAND_RESULT_TEXT = "Кількість знаків після коми";
+
     public RoundToTree(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/roundDigitSettingTree";
-        buttonText = "3";
-        commandResultText = "Your round - 3";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

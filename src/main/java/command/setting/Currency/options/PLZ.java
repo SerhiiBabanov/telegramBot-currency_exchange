@@ -9,11 +9,12 @@ import repository.Repository;
 import java.util.List;
 
 public class PLZ extends EditCommand {
+    protected static final String COMMAND_NAME = "/setPLZ";
+    protected static final String BUTTON_TEXT = "PLZ";
+    protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
+
     public PLZ(SendCommand parentCommand) {
-        super(parentCommand);
-        commandName = "/setPLZ";
-        buttonText = "PLZ";
-        commandResultText = "Зміни збережено";
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
     }
 
     @Override

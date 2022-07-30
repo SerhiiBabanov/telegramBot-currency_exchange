@@ -5,10 +5,14 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import repository.Repository;
 
 public abstract class EditCommand extends Command {
-    public String commandResultText;
-    public final SendCommand parentCommand;
+    private final SendCommand parentCommand;
 
-    protected EditCommand(SendCommand parentCommand) {
+    public SendCommand getParentCommand() {
+        return parentCommand;
+    }
+
+    protected EditCommand(String commandName, String buttonText, String commandResultText, SendCommand parentCommand) {
+        super(commandName, buttonText, commandResultText);
         this.parentCommand = parentCommand;
     }
 

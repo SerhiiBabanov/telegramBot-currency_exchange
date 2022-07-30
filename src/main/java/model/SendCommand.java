@@ -7,6 +7,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.List;
 
 public abstract class SendCommand extends Command {
+    public SendCommand(String commandName, String buttonText, String commandResultText) {
+        super(commandName, buttonText, commandResultText);
+    }
+
     public SendMessage execute(ChatSetting chatSetting){
         return SendMessage.builder()
                 .text(buttonText)

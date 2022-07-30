@@ -1,6 +1,5 @@
 import command.setting.reminders.ReminderSetting;
 import command.setting.reminders.options.*;
-import model.ChatSetting;
 import model.EditCommand;
 import model.SendCommand;
 import command.info.GetInfo;
@@ -18,6 +17,7 @@ import command.setting.roundResults.options.RoundToFour;
 import command.setting.roundResults.options.RoundToTree;
 import command.setting.roundResults.options.RoundToTwo;
 import command.start.Start;
+import model.TelegramBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
