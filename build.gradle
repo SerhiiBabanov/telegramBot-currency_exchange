@@ -26,6 +26,12 @@ test {
     useJUnitPlatform()
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 task copyToLib(type: Copy) {
     into "$buildDir/server"
     from(configurations.implementation) {
