@@ -67,6 +67,11 @@ public class GetInfo extends SendCommand {
         return null;
     }
 
+    @Override
+    public InlineKeyboardButton getBackButton() {
+        return null;
+    }
+
     String getExchangeAfterRoundResults(Exchange exchange, ChatSetting chatSetting) {
         BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);

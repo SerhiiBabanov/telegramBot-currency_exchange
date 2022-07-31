@@ -24,7 +24,7 @@ public abstract class SendCommand extends Command {
     }
 
     public abstract List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting);
-
+    public abstract InlineKeyboardButton getBackButton();
     protected void setSettingsButtons() {
         settingsButtons = new ArrayList<>();
         for (EditCommand command : TelegramBot.getEditCommands()) {
