@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class TelegramBot extends TelegramLongPollingBot {
     private static final List<EditCommand> editCommands = new ArrayList<>();
     private static final List<SendCommand> sendCommands = new ArrayList<>();
+    private static final int TIME_ZONE = 3;
 
     public final Repository repository;
 
@@ -98,7 +99,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         int pauseBeforeStartFirstTask = (60 - LocalTime.now().getMinute()) * 60;
 
         Runnable task1 = () -> {
-            int hour = LocalTime.now().getHour();
+            int hour = LocalTime.now().getHour() + TIME_ZONE;
             List<ChatSetting> settings = this.repository.getListOfSettings();
             for (ChatSetting ch : settings
             ) {
