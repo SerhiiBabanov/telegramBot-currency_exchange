@@ -3,9 +3,23 @@ package model;
 import banksUtils.monobank.MonobankUtils;
 import banksUtils.nbu.NBUUtils;
 import banksUtils.privatbank.PrivatbankUtils;
-import model.EditCommand;
-import model.SendCommand;
-import model.ChatSetting;
+import command.info.GetInfo;
+import command.setting.Currency.CurrencySetting;
+import command.setting.Currency.options.CAD;
+import command.setting.Currency.options.PLZ;
+import command.setting.Currency.options.USD;
+import command.setting.Setting;
+import command.setting.bank.BankSetting;
+import command.setting.bank.options.SetBankMonobank;
+import command.setting.bank.options.SetBankNBU;
+import command.setting.bank.options.SetBankPrivatbank;
+import command.setting.reminders.ReminderSetting;
+import command.setting.reminders.options.*;
+import command.setting.roundResults.RoundSetting;
+import command.setting.roundResults.options.RoundToFour;
+import command.setting.roundResults.options.RoundToTree;
+import command.setting.roundResults.options.RoundToTwo;
+import command.start.Start;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -16,6 +30,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import repository.Repository;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -23,20 +38,18 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TelegramBot extends TelegramLongPollingBot {
-    private static  List<EditCommand> editCommands = null;
-    private static  List<SendCommand> sendCommands = null;
+    private static final List<EditCommand> editCommands = new ArrayList<>();
+    private static final List<SendCommand> sendCommands = new ArrayList<>();
 
-    public final Repository chatSettings;
+    public final Repository repository;
 
-    public TelegramBot(List<EditCommand> editCommands, List<SendCommand> sendCommands, Repository chatSettings) {
+    public TelegramBot(Repository repository) {
         super();
-        TelegramBot.editCommands = editCommands;
-        TelegramBot.sendCommands = sendCommands;
-        this.chatSettings = chatSettings;
+        addEditCommands();
+        addSendCommands();
+        this.repository = repository;
         startScheduledTasks();
         startUpdateBankInfoTask();
-
-
     }
 
     private void startScheduledTasks() {
@@ -45,7 +58,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Runnable task1 = () -> {
             int hour = LocalTime.now().getHour();
-            List<ChatSetting> settings = this.chatSettings.getListOfSettings();
+            List<ChatSetting> settings = this.repository.getListOfSettings();
             for (ChatSetting ch : settings
             ) {
 
@@ -102,7 +115,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             String messageText = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
             SendMessage message = new SendMessage();
-            ChatSetting chatSetting = chatSettings.contains(chatId) ? chatSettings.getSetting(chatId) : ChatSetting.getDefault(chatId);
+            ChatSetting chatSetting = repository.contains(chatId) ? repository.getSetting(chatId) : ChatSetting.getDefault(chatId);
             for (SendCommand command : sendCommands) {
                 if (command.canExecute(messageText)) {
                     message = command.execute(chatSetting);
@@ -117,11 +130,11 @@ public class TelegramBot extends TelegramLongPollingBot {
             String callData = update.getCallbackQuery().getData();
             int messageId = update.getCallbackQuery().getMessage().getMessageId();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
-            ChatSetting chatSetting = chatSettings.contains(chatId) ? chatSettings.getSetting(chatId) : ChatSetting.getDefault(chatId);
+            ChatSetting chatSetting = repository.contains(chatId) ? repository.getSetting(chatId) : ChatSetting.getDefault(chatId);
             EditMessageText editMessage = null;
             for (EditCommand command : editCommands) {
                 if (command.canExecute(callData)) {
-                    editMessage = command.execute(chatSetting, messageId, chatSettings);
+                    editMessage = command.execute(chatSetting, messageId, repository);
                 }
             }
             SendMessage message = null;
@@ -142,5 +155,36 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
 
+    }
+    private static void addEditCommands() {
+        editCommands.add(new RoundToTwo());
+        editCommands.add(new RoundToTree());
+        editCommands.add(new RoundToFour());
+        editCommands.add(new SetBankMonobank());
+        editCommands.add(new SetBankNBU());
+        editCommands.add(new SetBankPrivatbank());
+        editCommands.add(new PLZ());
+        editCommands.add(new USD());
+        editCommands.add(new CAD());
+        editCommands.add(new SetReminderAt9());
+        editCommands.add(new SetReminderAt10());
+        editCommands.add(new SetReminderAt11());
+        editCommands.add(new SetReminderAt12());
+        editCommands.add(new SetReminderAt13());
+        editCommands.add(new SetReminderAt14());
+        editCommands.add(new SetReminderAt15());
+        editCommands.add(new SetReminderAt16());
+        editCommands.add(new SetReminderAt17());
+        editCommands.add(new SetReminderAt18());
+        editCommands.add(new SetReminderAtNone());
+    }
+    private static void addSendCommands() {
+        sendCommands.add(new Start());              //0
+        sendCommands.add(new Setting());            //1
+        sendCommands.add(new RoundSetting());       //2
+        sendCommands.add(new GetInfo());            //3
+        sendCommands.add(new BankSetting());        //4
+        sendCommands.add(new CurrencySetting());    //5
+        sendCommands.add(new ReminderSetting());    //6
     }
 }

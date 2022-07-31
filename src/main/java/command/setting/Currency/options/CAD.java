@@ -12,9 +12,10 @@ public class CAD extends EditCommand {
     protected static final String COMMAND_NAME = "/setCAD";
     protected static final String BUTTON_TEXT = "CAD";
     protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
+    protected static final String PARENT_COMMAND = "/valuteSetting";
 
-    public CAD(SendCommand parentCommand) {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
+    public CAD() {
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
 
 

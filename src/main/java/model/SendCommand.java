@@ -4,11 +4,14 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SendCommand extends Command {
+    protected List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
     public SendCommand(String commandName, String buttonText, String commandResultText) {
         super(commandName, buttonText, commandResultText);
+        setSettingsButtons();
     }
 
     public SendMessage execute(ChatSetting chatSetting){
@@ -19,4 +22,12 @@ public abstract class SendCommand extends Command {
                 .build();
     }
     public abstract List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting);
+    protected void setSettingsButtons(){
+        settingsButtons = new ArrayList<>();
+        for (EditCommand command: TelegramBot.getEditCommands()){
+            if (command.getParentCommand().equals(commandName)){
+                settingsButtons.add(List.of(command.getButton()));
+            }
+        }
+    }
 }

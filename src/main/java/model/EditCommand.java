@@ -5,13 +5,13 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import repository.Repository;
 
 public abstract class EditCommand extends Command {
-    private final SendCommand parentCommand;
+    private final String parentCommand;
 
-    public SendCommand getParentCommand() {
+    public String getParentCommand() {
         return parentCommand;
     }
 
-    protected EditCommand(String commandName, String buttonText, String commandResultText, SendCommand parentCommand) {
+    protected EditCommand(String commandName, String buttonText, String commandResultText, String parentCommand) {
         super(commandName, buttonText, commandResultText);
         this.parentCommand = parentCommand;
     }
@@ -20,10 +20,19 @@ public abstract class EditCommand extends Command {
         setSetting(chatSetting, repository);
         return EditMessageText.builder()
                 .text(commandResultText)
-                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(parentCommand.getKeyboard(chatSetting)).build())
+                .replyMarkup(InlineKeyboardMarkup.builder()
+                        .keyboard(getParentCommandObj(parentCommand).getKeyboard(chatSetting))
+                        .build())
                 .chatId(chatSetting.getChatId())
                 .messageId(messageId)
                 .build();
     }
     public abstract void setSetting(ChatSetting chatSetting, Repository repository);
+    private SendCommand getParentCommandObj(String parentCommand){
+        return TelegramBot.getSendCommands().stream()
+                .filter(sendCommand -> sendCommand.getCommandName().equals(parentCommand))
+                .findFirst()
+                .orElse(null);
+
+    }
 }

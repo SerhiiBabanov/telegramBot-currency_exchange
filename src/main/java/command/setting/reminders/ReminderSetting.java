@@ -1,7 +1,7 @@
 package command.setting.reminders;
 
+import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
-import command.setting.reminders.options.*;
 import model.ChatSetting;
 import model.EditCommand;
 import model.SendCommand;
@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReminderSetting extends SendCommand {
     protected static final String COMMAND_NAME = "/reminderSetting";
@@ -20,38 +21,45 @@ public class ReminderSetting extends SendCommand {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
 
-
     @Override
-    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
-        List<List<InlineKeyboardButton>> reminderButtons = new ArrayList<>();
+    protected void setSettingsButtons() {
+
         List<InlineKeyboardButton> buttonsRow = new ArrayList<>();
         int counterButtonsInRow = 0;
         for (EditCommand command : TelegramBot.getEditCommands()) {
-            if (command.getParentCommand().getCommandName().equals(this.commandName)) {
+            if (command.getParentCommand().equals(this.commandName)) {
                 buttonsRow.add(command.getButton());
                 counterButtonsInRow++;
                 if (counterButtonsInRow == 3) {
-                    reminderButtons.add(List.copyOf(buttonsRow));
+                    settingsButtons.add(List.copyOf(buttonsRow));
                     buttonsRow.clear();
                     counterButtonsInRow = 0;
                 }
             }
         }
-        if (counterButtonsInRow != 0){
-            reminderButtons.add(buttonsRow);
+        if (counterButtonsInRow != 0) {
+            settingsButtons.add(buttonsRow);
         }
+    }
 
-        for (List<InlineKeyboardButton> row : reminderButtons
+    @Override
+    public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
+        List<List<InlineKeyboardButton>> settingsButtonsCopy = new ArrayList<>();
+        Gson gson = new Gson();
+        for (List<InlineKeyboardButton> row : settingsButtons
         ) {
-            for (InlineKeyboardButton button : row
-            ) {
-                if (button.getCallbackData().equals("/SetReminderAt" + chatSetting.getReminderTime())){
-                    button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
-                }
-
-            }
+            settingsButtonsCopy.add(
+                    row.stream()
+                            .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
+                            .peek(button -> {
+                                if (button.getCallbackData().equals("/SetReminderAt" + chatSetting.getReminderTime())) {
+                                    button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
+                                }
+                            })
+                            .collect(Collectors.toList())
+            );
 
         }
-        return reminderButtons;
+        return settingsButtonsCopy;
     }
 }

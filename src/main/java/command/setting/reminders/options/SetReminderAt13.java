@@ -9,9 +9,9 @@ public class SetReminderAt13 extends EditCommand {
     protected static final String COMMAND_NAME = "/SetReminderAt13";
     protected static final String BUTTON_TEXT = "13";
     protected static final String COMMAND_RESULT_TEXT = "Ваш час сповіщень - 13 година";
-
-    public SetReminderAt13(SendCommand parentCommand) {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
+    protected static final String PARENT_COMMAND = "/reminderSetting";
+    public SetReminderAt13() {
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
 
     @Override

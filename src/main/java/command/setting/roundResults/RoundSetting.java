@@ -1,6 +1,7 @@
 package command.setting.roundResults;
 
 
+import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
 import model.EditCommand;
 import model.SendCommand;
@@ -31,14 +32,10 @@ public class RoundSetting extends SendCommand {
 
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
-        List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
-        for (EditCommand command: TelegramBot.getEditCommands()){
-            if (command.getParentCommand().getCommandName().equals(this.commandName)){
-                settingsButtons.add(List.of(command.getButton()));
-            }
-        }
-        settingsButtons = settingsButtons.stream()
+        Gson gson = new Gson();
+        return settingsButtons.stream()
                 .flatMap(Collection::stream)
+                .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
                 .peek(button -> {
                     if (button.getText().equals(String.valueOf(chatSetting.getRoundDigit()))){
                         button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
@@ -46,6 +43,7 @@ public class RoundSetting extends SendCommand {
                 })
                 .map(Arrays::asList)
                 .collect(Collectors.toList());
-        return settingsButtons;
     }
+
+
 }

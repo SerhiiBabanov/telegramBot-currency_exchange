@@ -9,9 +9,9 @@ public class SetReminderAtNone extends EditCommand {
     protected static final String COMMAND_NAME = "/SetReminderAt25";
     protected static final String BUTTON_TEXT = "Вимкнути сповіщення";
     protected static final String COMMAND_RESULT_TEXT = "Сповіщення вимкнені";
-
-    public SetReminderAtNone(SendCommand parentCommand) {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, parentCommand);
+    protected static final String PARENT_COMMAND = "/reminderSetting";
+    public SetReminderAtNone() {
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
 
     @Override
