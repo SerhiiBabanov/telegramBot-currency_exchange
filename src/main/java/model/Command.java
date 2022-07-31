@@ -28,7 +28,8 @@ public abstract class Command {
     public boolean canExecute(String commandName) {
         return this.commandName.equalsIgnoreCase(commandName);
     }
-    public InlineKeyboardButton getButton(){
+
+    public InlineKeyboardButton getButton() {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(buttonText);
         button.setCallbackData(commandName);

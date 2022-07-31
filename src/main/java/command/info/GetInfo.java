@@ -3,10 +3,10 @@ package command.info;
 import banksUtils.monobank.MonobankUtils;
 import banksUtils.nbu.NBUUtils;
 import banksUtils.privatbank.PrivatbankUtils;
-import model.SendCommand;
 import model.ChatSetting;
 import model.Currency;
 import model.Exchange;
+import model.SendCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 

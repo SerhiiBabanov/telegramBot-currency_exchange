@@ -52,6 +52,47 @@ public class TelegramBot extends TelegramLongPollingBot {
         startUpdateBankInfoTask();
     }
 
+    public static List<EditCommand> getEditCommands() {
+        return editCommands;
+    }
+
+    public static List<SendCommand> getSendCommands() {
+        return sendCommands;
+    }
+
+    private static void addEditCommands() {
+        editCommands.add(new RoundToTwo());
+        editCommands.add(new RoundToTree());
+        editCommands.add(new RoundToFour());
+        editCommands.add(new SetBankMonobank());
+        editCommands.add(new SetBankNBU());
+        editCommands.add(new SetBankPrivatbank());
+        editCommands.add(new PLZ());
+        editCommands.add(new USD());
+        editCommands.add(new CAD());
+        editCommands.add(new SetReminderAt9());
+        editCommands.add(new SetReminderAt10());
+        editCommands.add(new SetReminderAt11());
+        editCommands.add(new SetReminderAt12());
+        editCommands.add(new SetReminderAt13());
+        editCommands.add(new SetReminderAt14());
+        editCommands.add(new SetReminderAt15());
+        editCommands.add(new SetReminderAt16());
+        editCommands.add(new SetReminderAt17());
+        editCommands.add(new SetReminderAt18());
+        editCommands.add(new SetReminderAtNone());
+    }
+
+    private static void addSendCommands() {
+        sendCommands.add(new Start());              //0
+        sendCommands.add(new Setting());            //1
+        sendCommands.add(new RoundSetting());       //2
+        sendCommands.add(new GetInfo());            //3
+        sendCommands.add(new BankSetting());        //4
+        sendCommands.add(new CurrencySetting());    //5
+        sendCommands.add(new ReminderSetting());    //6
+    }
+
     private void startScheduledTasks() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         int pauseBeforeStartFirstTask = (60 - LocalTime.now().getMinute()) * 60;
@@ -78,6 +119,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         };
         executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 3600, TimeUnit.SECONDS);
     }
+
     private void startUpdateBankInfoTask() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         int pauseBeforeStartFirstTask = 60;
@@ -90,14 +132,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         executor.scheduleAtFixedRate(task1, pauseBeforeStartFirstTask, 60, TimeUnit.SECONDS);
     }
 
-    public static List<EditCommand> getEditCommands() {
-        return editCommands;
-    }
-
-    public static List<SendCommand> getSendCommands() {
-        return sendCommands;
-    }
-
     @Override
     public String getBotUsername() {
         return "goit_java_telegram_bot";
@@ -107,7 +141,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return "5588477547:AAHAGkA7oAgtwJTdH34DIC5DocwS_dSKOvY";
     }
-
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -155,36 +188,5 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
 
-    }
-    private static void addEditCommands() {
-        editCommands.add(new RoundToTwo());
-        editCommands.add(new RoundToTree());
-        editCommands.add(new RoundToFour());
-        editCommands.add(new SetBankMonobank());
-        editCommands.add(new SetBankNBU());
-        editCommands.add(new SetBankPrivatbank());
-        editCommands.add(new PLZ());
-        editCommands.add(new USD());
-        editCommands.add(new CAD());
-        editCommands.add(new SetReminderAt9());
-        editCommands.add(new SetReminderAt10());
-        editCommands.add(new SetReminderAt11());
-        editCommands.add(new SetReminderAt12());
-        editCommands.add(new SetReminderAt13());
-        editCommands.add(new SetReminderAt14());
-        editCommands.add(new SetReminderAt15());
-        editCommands.add(new SetReminderAt16());
-        editCommands.add(new SetReminderAt17());
-        editCommands.add(new SetReminderAt18());
-        editCommands.add(new SetReminderAtNone());
-    }
-    private static void addSendCommands() {
-        sendCommands.add(new Start());              //0
-        sendCommands.add(new Setting());            //1
-        sendCommands.add(new RoundSetting());       //2
-        sendCommands.add(new GetInfo());            //3
-        sendCommands.add(new BankSetting());        //4
-        sendCommands.add(new CurrencySetting());    //5
-        sendCommands.add(new ReminderSetting());    //6
     }
 }

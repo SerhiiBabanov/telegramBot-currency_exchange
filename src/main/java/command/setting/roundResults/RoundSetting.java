@@ -3,18 +3,10 @@ package command.setting.roundResults;
 
 import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
-import model.EditCommand;
-import model.SendCommand;
-import command.setting.roundResults.options.RoundToFour;
-import command.setting.roundResults.options.RoundToTree;
-import command.setting.roundResults.options.RoundToTwo;
 import model.ChatSetting;
-import model.TelegramBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import model.SendCommand;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +29,7 @@ public class RoundSetting extends SendCommand {
                 .flatMap(Collection::stream)
                 .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
                 .peek(button -> {
-                    if (button.getText().equals(String.valueOf(chatSetting.getRoundDigit()))){
+                    if (button.getText().equals(String.valueOf(chatSetting.getRoundDigit()))) {
                         button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
                     }
                 })

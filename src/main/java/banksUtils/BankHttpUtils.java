@@ -1,7 +1,6 @@
 package banksUtils;
 
 import com.google.gson.Gson;
-import model.Exchange;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

@@ -7,16 +7,16 @@ import repository.Repository;
 public abstract class EditCommand extends Command {
     private final String parentCommand;
 
-    public String getParentCommand() {
-        return parentCommand;
-    }
-
     protected EditCommand(String commandName, String buttonText, String commandResultText, String parentCommand) {
         super(commandName, buttonText, commandResultText);
         this.parentCommand = parentCommand;
     }
 
-    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository){
+    public String getParentCommand() {
+        return parentCommand;
+    }
+
+    public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
         setSetting(chatSetting, repository);
         return EditMessageText.builder()
                 .text(commandResultText)
@@ -27,8 +27,10 @@ public abstract class EditCommand extends Command {
                 .messageId(messageId)
                 .build();
     }
+
     public abstract void setSetting(ChatSetting chatSetting, Repository repository);
-    private SendCommand getParentCommandObj(String parentCommand){
+
+    private SendCommand getParentCommandObj(String parentCommand) {
         return TelegramBot.getSendCommands().stream()
                 .filter(sendCommand -> sendCommand.getCommandName().equals(parentCommand))
                 .findFirst()

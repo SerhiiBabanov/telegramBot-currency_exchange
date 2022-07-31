@@ -25,6 +25,18 @@ public class ChatSetting {
         this.currencies = currencies;
     }
 
+    public static ChatSetting getDefault(long chatId) {
+        ChatSetting defaultSetting = new ChatSetting(chatId);
+        defaultSetting.setBank(new PrivatbankUtils());
+        defaultSetting.setRoundDigit(2);
+        List<Currency> currencyList = new ArrayList<>();
+
+        currencyList.add(Currency.USD);
+        defaultSetting.setValutes(currencyList);
+        defaultSetting.setReminderTime(13);
+        return defaultSetting;
+    }
+
     public long getChatId() {
         return chatId;
     }
@@ -51,17 +63,6 @@ public class ChatSetting {
 
     public int getReminderTime() {
         return reminderTime;
-    }
-    public static ChatSetting getDefault(long chatId){
-        ChatSetting defaultSetting = new ChatSetting(chatId);
-        defaultSetting.setBank(new PrivatbankUtils());
-        defaultSetting.setRoundDigit(2);
-        List<Currency> currencyList = new ArrayList<>();
-
-        currencyList.add(Currency.USD);
-        defaultSetting.setValutes(currencyList);
-        defaultSetting.setReminderTime(13);
-        return defaultSetting;
     }
 
     public void setReminderTime(int reminderTime) {

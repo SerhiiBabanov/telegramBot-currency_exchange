@@ -2,15 +2,13 @@ package command.setting.bank;
 
 import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
-import command.setting.bank.options.SetBankMonobank;
-import command.setting.bank.options.SetBankNBU;
-import command.setting.bank.options.SetBankPrivatbank;
-import model.*;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import model.ChatSetting;
+import model.SendCommand;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BankSetting extends SendCommand {

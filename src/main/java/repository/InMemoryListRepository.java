@@ -2,9 +2,10 @@ package repository;
 
 import model.ChatSetting;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class InMemoryListRepository implements Repository{
+public class InMemoryListRepository implements Repository {
     private final List<ChatSetting> chatSettings;
 
     public InMemoryListRepository() {
@@ -19,7 +20,7 @@ public class InMemoryListRepository implements Repository{
     @Override
     public void add(long chatId, ChatSetting chatSetting) {
         for (int i = 0; i < chatSettings.size(); i++) {
-            if (chatSettings.get(i).getChatId() == chatId){
+            if (chatSettings.get(i).getChatId() == chatId) {
                 chatSettings.set(i, chatSetting);
                 return;
             }
@@ -30,7 +31,7 @@ public class InMemoryListRepository implements Repository{
     @Override
     public void delete(long chatId) {
         for (int i = 0; i < chatSettings.size(); i++) {
-            if (chatSettings.get(i).getChatId() == chatId){
+            if (chatSettings.get(i).getChatId() == chatId) {
                 chatSettings.remove(i);
                 return;
             }

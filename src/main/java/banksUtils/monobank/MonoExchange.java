@@ -12,6 +12,7 @@ public class MonoExchange {
 
     public MonoExchange() {
     }
+
     //rateCross - need to fix
     public Exchange getExchange() {
         String ccy = CurrencyCode.codes.stream().filter(code -> code.getCode() == this.currencyCodeA).map(Code::getName).findFirst().orElse(" ");

@@ -1,9 +1,8 @@
 package command.setting.Currency.options;
 
-import model.EditCommand;
 import model.ChatSetting;
 import model.Currency;
-import model.SendCommand;
+import model.EditCommand;
 import repository.Repository;
 
 import java.util.List;
@@ -13,6 +12,7 @@ public class USD extends EditCommand {
     protected static final String BUTTON_TEXT = "USD";
     protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
     protected static final String PARENT_COMMAND = "/valuteSetting";
+
     public USD() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
@@ -20,7 +20,7 @@ public class USD extends EditCommand {
     @Override
     public void setSetting(ChatSetting chatSetting, Repository repository) {
         List<Currency> currencies = chatSetting.getValutes();
-        if (chatSetting.getValutes().contains(Currency.USD)){
+        if (chatSetting.getValutes().contains(Currency.USD)) {
             currencies.remove(Currency.USD);
         } else {
             currencies.add(Currency.USD);

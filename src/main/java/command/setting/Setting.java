@@ -1,13 +1,11 @@
 package command.setting;
 
+import command.setting.Currency.CurrencySetting;
 import command.setting.bank.BankSetting;
 import command.setting.reminders.ReminderSetting;
 import command.setting.roundResults.RoundSetting;
-import model.SendCommand;
-import command.setting.Currency.CurrencySetting;
 import model.ChatSetting;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import model.SendCommand;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;

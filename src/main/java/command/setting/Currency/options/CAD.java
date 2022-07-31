@@ -1,9 +1,8 @@
 package command.setting.Currency.options;
 
-import model.EditCommand;
 import model.ChatSetting;
 import model.Currency;
-import model.SendCommand;
+import model.EditCommand;
 import repository.Repository;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class CAD extends EditCommand {
     @Override
     public void setSetting(ChatSetting chatSetting, Repository repository) {
         List<Currency> currencies = chatSetting.getValutes();
-        if (chatSetting.getValutes().contains(Currency.CAD)){
+        if (chatSetting.getValutes().contains(Currency.CAD)) {
             currencies.remove(Currency.CAD);
         } else {
             currencies.add(Currency.CAD);

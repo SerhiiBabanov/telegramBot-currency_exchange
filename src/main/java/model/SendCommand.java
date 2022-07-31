@@ -9,23 +9,26 @@ import java.util.List;
 
 public abstract class SendCommand extends Command {
     protected List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
+
     public SendCommand(String commandName, String buttonText, String commandResultText) {
         super(commandName, buttonText, commandResultText);
         setSettingsButtons();
     }
 
-    public SendMessage execute(ChatSetting chatSetting){
+    public SendMessage execute(ChatSetting chatSetting) {
         return SendMessage.builder()
                 .text(buttonText)
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(getKeyboard(chatSetting)).build())
                 .chatId(chatSetting.getChatId())
                 .build();
     }
+
     public abstract List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting);
-    protected void setSettingsButtons(){
+
+    protected void setSettingsButtons() {
         settingsButtons = new ArrayList<>();
-        for (EditCommand command: TelegramBot.getEditCommands()){
-            if (command.getParentCommand().equals(commandName)){
+        for (EditCommand command : TelegramBot.getEditCommands()) {
+            if (command.getParentCommand().equals(commandName)) {
                 settingsButtons.add(List.of(command.getButton()));
             }
         }

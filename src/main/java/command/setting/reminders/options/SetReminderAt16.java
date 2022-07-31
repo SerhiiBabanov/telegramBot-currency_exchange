@@ -2,7 +2,6 @@ package command.setting.reminders.options;
 
 import model.ChatSetting;
 import model.EditCommand;
-import model.SendCommand;
 import repository.Repository;
 
 public class SetReminderAt16 extends EditCommand {
@@ -10,6 +9,7 @@ public class SetReminderAt16 extends EditCommand {
     protected static final String BUTTON_TEXT = "16";
     protected static final String COMMAND_RESULT_TEXT = "Ваш час сповіщень - 16 година";
     protected static final String PARENT_COMMAND = "/reminderSetting";
+
     public SetReminderAt16() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
