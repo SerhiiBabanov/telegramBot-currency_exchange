@@ -1,5 +1,6 @@
 package command.setting.roundResults.options;
 
+import command.setting.roundResults.RoundSetting;
 import model.ChatSetting;
 import model.EditCommand;
 import repository.Repository;
@@ -8,7 +9,7 @@ public class RoundToTree extends EditCommand {
     protected static final String COMMAND_NAME = "/roundDigitSetting3";
     protected static final String BUTTON_TEXT = "3";
     protected static final String COMMAND_RESULT_TEXT = "Кількість знаків після коми";
-    protected static final String PARENT_COMMAND = "/roundDigitSetting";
+    protected static final String PARENT_COMMAND = new RoundSetting().getCommandName();
 
     public RoundToTree() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);

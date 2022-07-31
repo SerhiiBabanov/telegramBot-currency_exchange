@@ -1,5 +1,6 @@
 package command.setting.Currency.options;
 
+import command.setting.Currency.CurrencySetting;
 import model.ChatSetting;
 import model.Currency;
 import model.EditCommand;
@@ -11,7 +12,7 @@ public class PLZ extends EditCommand {
     protected static final String COMMAND_NAME = "/setPLZ";
     protected static final String BUTTON_TEXT = "PLZ";
     protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
-    protected static final String PARENT_COMMAND = "/valuteSetting";
+    protected static final String PARENT_COMMAND = new CurrencySetting().getCommandName();
 
     public PLZ() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
