@@ -39,7 +39,7 @@ public class GetInfo extends SendCommand {
         }
 
         if (Objects.nonNull(exchangeList)) {
-            for (Currency v : chatSetting.getValutes()
+            for (Currency v : chatSetting.getCurrencies()
             ) {
                 Optional<Exchange> exchange = exchangeList.stream()
                         .filter(ex -> ex.ccy.equalsIgnoreCase(v.name()))

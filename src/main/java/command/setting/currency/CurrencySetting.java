@@ -1,4 +1,4 @@
-package command.setting.Currency;
+package command.setting.currency;
 
 import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CurrencySetting extends SendCommand {
-    public static final String COMMAND_NAME = "/valuteSetting";
+    public static final String COMMAND_NAME = "/currencySetting";
     protected static final String BUTTON_TEXT = "Валюта";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -38,7 +38,7 @@ public class CurrencySetting extends SendCommand {
                 .flatMap(Collection::stream)
                 .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
                 .peek(button -> {
-                    if ((chatSetting.getValutes().contains(Currency.valueOf(button.getText())))) {
+                    if ((chatSetting.getCurrencies().contains(Currency.valueOf(button.getText())))) {
                         button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
                     }
                 })

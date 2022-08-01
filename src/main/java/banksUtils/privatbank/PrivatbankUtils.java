@@ -24,7 +24,7 @@ public class PrivatbankUtils extends Bank {
     }
 
     public PrivatbankUtils() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, COMMAND_RESULT_TEXT);
     }
 
     public static void updateExchangeList() {

@@ -1,7 +1,7 @@
 package command.setting;
 
 import com.vdurmont.emoji.EmojiParser;
-import command.setting.Currency.CurrencySetting;
+import command.setting.currency.CurrencySetting;
 import command.setting.bank.BankSetting;
 import command.setting.reminders.ReminderSetting;
 import command.setting.roundResults.RoundSetting;

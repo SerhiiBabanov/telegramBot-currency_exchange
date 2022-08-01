@@ -32,7 +32,7 @@ public class ChatSetting {
         List<Currency> currencyList = new ArrayList<>();
 
         currencyList.add(Currency.USD);
-        defaultSetting.setValutes(currencyList);
+        defaultSetting.setCurrencies(currencyList);
         defaultSetting.setReminderTime(13);
         return defaultSetting;
     }
@@ -41,9 +41,6 @@ public class ChatSetting {
         return chatId;
     }
 
-    public void setChatId(long chatId) {
-        this.chatId = chatId;
-    }
 
     public int getRoundDigit() {
         return roundDigit;
@@ -69,11 +66,11 @@ public class ChatSetting {
         this.reminderTime = reminderTime;
     }
 
-    public List<Currency> getValutes() {
+    public List<Currency> getCurrencies() {
         return currencies;
     }
 
-    public void setValutes(List<Currency> currencies) {
+    public void setCurrencies(List<Currency> currencies) {
         this.currencies = currencies;
     }
 

@@ -24,7 +24,7 @@ public class MonobankUtils extends Bank {
     }
 
     public MonobankUtils() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, COMMAND_RESULT_TEXT);
     }
 
     public static void updateExchangeList() {
