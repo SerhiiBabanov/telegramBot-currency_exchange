@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReminderSetting extends SendCommand {
-    protected static final String COMMAND_NAME = "/reminderSetting";
+    public static final String COMMAND_NAME = "/reminderSetting";
     protected static final String BUTTON_TEXT = "Час сповіщень";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -26,7 +26,7 @@ public class ReminderSetting extends SendCommand {
     public InlineKeyboardButton getBackButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(new Setting().getCommandName());
+        button.setCallbackData(Setting.COMMAND_NAME);
         return button;
     }
     @Override
@@ -68,7 +68,7 @@ public class ReminderSetting extends SendCommand {
             );
 
         }
-        settingsButtonsCopy.add(List.of(new Start().getHomeButton(), getBackButton()));
+        settingsButtonsCopy.add(List.of(Start.getHomeButton(), getBackButton()));
         return settingsButtonsCopy;
     }
 }

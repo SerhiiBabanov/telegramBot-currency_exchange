@@ -10,11 +10,10 @@ import model.ChatSetting;
 import model.SendCommand;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Setting extends SendCommand {
-    protected static final String COMMAND_NAME = "/setting";
+    public static final String COMMAND_NAME = "/setting";
     protected static final String BUTTON_TEXT = "Налаштування";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -25,17 +24,20 @@ public class Setting extends SendCommand {
     public InlineKeyboardButton getBackButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(new Start().getCommandName());
+        button.setCallbackData(Start.COMMAND_NAME);
         return button;
     }
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
-        List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
+        return settingsButtons;
+    }
+
+    @Override
+    protected void setSettingsButtons() {
         settingsButtons.add(List.of(new RoundSetting().getButton()));
         settingsButtons.add(List.of(new BankSetting().getButton()));
         settingsButtons.add(List.of(new CurrencySetting().getButton()));
         settingsButtons.add(List.of(new ReminderSetting().getButton()));
-        settingsButtons.add(List.of(new Start().getHomeButton(), getBackButton()));
-        return settingsButtons;
+        settingsButtons.add(List.of(Start.getHomeButton(), getBackButton()));
     }
 }

@@ -6,34 +6,42 @@ import model.Bank;
 import model.Exchange;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrivatbankUtils extends Bank {
     private static final String URL = "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11";
+    public static final String COMMAND_NAME = "/setPrivatbank";
+    protected static final String BUTTON_TEXT = "Приватбанк";
+    protected static final String COMMAND_RESULT_TEXT = "Курс в ПриватБанк";
+
     private static final Type typeToken = new TypeToken<List<Exchange>>() {
     }.getType();
-    private static List<Exchange> exchanges;
+    private static final List<Exchange> exchanges = new ArrayList<>();
 
     static {
         updateExchangeList();
     }
 
+    public PrivatbankUtils() {
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+    }
+
     public static void updateExchangeList() {
-        exchanges = BankHttpUtils.getExchangeList(URL, typeToken);
+        List<Exchange> exchangeList = BankHttpUtils.getExchangeList(URL, typeToken);
+        synchronized (exchanges){
+            exchanges.clear();
+            exchanges.addAll(exchangeList);
+        }
     }
 
     @Override
     public List<Exchange> getExchangeList() {
-        return List.copyOf(exchanges);
+        List<Exchange> exchangeList;
+        synchronized (exchanges){
+            exchangeList = List.copyOf(exchanges);
+        }
+        return exchangeList;
     }
 
-    @Override
-    public String getButtonCallbackData() {
-        return "/setPrivatbank";
-    }
-
-    @Override
-    public String toString() {
-        return "/privatbank";
-    }
 }

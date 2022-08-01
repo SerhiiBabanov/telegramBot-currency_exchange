@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CurrencySetting extends SendCommand {
-    protected static final String COMMAND_NAME = "/valuteSetting";
+    public static final String COMMAND_NAME = "/valuteSetting";
     protected static final String BUTTON_TEXT = "Валюта";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -27,7 +27,7 @@ public class CurrencySetting extends SendCommand {
     public InlineKeyboardButton getBackButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(new Setting().getCommandName());
+        button.setCallbackData(Setting.COMMAND_NAME);
         return button;
     }
     @Override
@@ -43,6 +43,6 @@ public class CurrencySetting extends SendCommand {
                     }
                 })
                 .map(Arrays::asList),
-                Stream.of(List.of(new Start().getHomeButton(), getBackButton()))).collect(Collectors.toList());
+                Stream.of(List.of(Start.getHomeButton(), getBackButton()))).collect(Collectors.toList());
     }
 }

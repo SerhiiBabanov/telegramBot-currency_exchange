@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BankSetting extends SendCommand {
-    protected static final String COMMAND_NAME = "/bankSetting";
+    public static final String COMMAND_NAME = "/bankSetting";
     protected static final String BUTTON_TEXT = "Банк";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -26,7 +26,7 @@ public class BankSetting extends SendCommand {
     public InlineKeyboardButton getBackButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(new Setting().getCommandName());
+        button.setCallbackData(Setting.COMMAND_NAME);
         return button;
     }
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
@@ -36,13 +36,14 @@ public class BankSetting extends SendCommand {
                 .flatMap(Collection::stream)
                 .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
                 .peek(button -> {
-                    if (button.getCallbackData().equals(chatSetting.getBank().getButtonCallbackData())) {
+                    if (button.getCallbackData().equals(chatSetting.getBank().getCommandName())) {
                         button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
                     }
                 })
                 .map(Arrays::asList),
-                Stream.of(List.of(new Start().getHomeButton(), getBackButton()))).collect(Collectors.toList());
+                Stream.of(List.of(Start.getHomeButton(), getBackButton()))).collect(Collectors.toList());
 
     }
+
 
 }

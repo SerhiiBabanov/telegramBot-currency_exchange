@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RoundSetting extends SendCommand {
-    protected static final String COMMAND_NAME = "/roundDigitSetting";
+    public static final String COMMAND_NAME = "/roundDigitSetting";
     protected static final String BUTTON_TEXT = "Кількість знаків після коми";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -27,7 +27,7 @@ public class RoundSetting extends SendCommand {
     public InlineKeyboardButton getBackButton() {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(new Setting().getCommandName());
+        button.setCallbackData(Setting.COMMAND_NAME);
         return button;
     }
 
@@ -44,7 +44,7 @@ public class RoundSetting extends SendCommand {
                             }
                         })
                         .map(Arrays::asList),
-                Stream.of(List.of(new Start().getHomeButton(), getBackButton()))).collect(Collectors.toList());
+                Stream.of(List.of(Start.getHomeButton(), getBackButton()))).collect(Collectors.toList());
 
     }
 

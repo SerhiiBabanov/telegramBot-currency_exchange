@@ -9,7 +9,7 @@ public class SetReminderAt14 extends EditCommand {
     protected static final String COMMAND_NAME = "/SetReminderAt14";
     protected static final String BUTTON_TEXT = "14";
     protected static final String COMMAND_RESULT_TEXT = "Ваш час сповіщень - 14 година";
-    protected static final String PARENT_COMMAND = new ReminderSetting().getCommandName();
+    protected static final String PARENT_COMMAND = ReminderSetting.COMMAND_NAME;
 
     public SetReminderAt14() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);

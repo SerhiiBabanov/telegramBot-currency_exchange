@@ -10,7 +10,7 @@ public class SetBankPrivatbank extends EditCommand {
     protected static final String COMMAND_NAME = "/setPrivatbank";
     protected static final String BUTTON_TEXT = "ПриватБанк";
     protected static final String COMMAND_RESULT_TEXT = "Ваш банк - ПриватБанк";
-    protected static final String PARENT_COMMAND = new BankSetting().getCommandName();
+    protected static final String PARENT_COMMAND = BankSetting.COMMAND_NAME;
 
     public SetBankPrivatbank() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);

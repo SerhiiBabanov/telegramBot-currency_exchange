@@ -1,7 +1,6 @@
 package command.setting.Currency.options;
 
 import command.setting.Currency.CurrencySetting;
-import command.setting.bank.BankSetting;
 import model.ChatSetting;
 import model.Currency;
 import model.EditCommand;
@@ -13,7 +12,7 @@ public class CAD extends EditCommand {
     protected static final String COMMAND_NAME = "/setCAD";
     protected static final String BUTTON_TEXT = "CAD";
     protected static final String COMMAND_RESULT_TEXT = "Зміни збережено";
-    protected static final String PARENT_COMMAND = new CurrencySetting().getCommandName();
+    protected static final String PARENT_COMMAND = CurrencySetting.COMMAND_NAME;
 
     public CAD() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);

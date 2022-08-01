@@ -4,6 +4,8 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import repository.Repository;
 
+import static model.TelegramBot.getSendCommands;
+
 public abstract class EditCommand extends Command {
     private final String parentCommand;
 
@@ -31,7 +33,7 @@ public abstract class EditCommand extends Command {
     public abstract void setSetting(ChatSetting chatSetting, Repository repository);
 
     private SendCommand getParentCommandObj(String parentCommand) {
-        return TelegramBot.getSendCommands().stream()
+        return getSendCommands().stream()
                 .filter(sendCommand -> sendCommand.getCommandName().equals(parentCommand))
                 .findFirst()
                 .orElse(null);

@@ -50,6 +50,6 @@ public class InMemoryListRepository implements Repository {
 
     @Override
     public List<ChatSetting> getListOfSettings() {
-        return chatSettings;
+        return List.copyOf(chatSettings);
     }
 }

@@ -1,12 +1,6 @@
 package command.info;
 
-import banksUtils.monobank.MonobankUtils;
-import banksUtils.nbu.NBUUtils;
-import banksUtils.privatbank.PrivatbankUtils;
-import model.ChatSetting;
-import model.Currency;
-import model.Exchange;
-import model.SendCommand;
+import model.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -17,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class GetInfo extends SendCommand {
-    protected static final String COMMAND_NAME = "/getInfo";
+    public static final String COMMAND_NAME = "/getInfo";
     protected static final String BUTTON_TEXT = "Отримати інфо";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
 
@@ -32,18 +26,16 @@ public class GetInfo extends SendCommand {
         sendMessage.setText("Результати не знайдені");
         StringBuilder result = new StringBuilder();
 
+        List<Bank> banks = TelegramBot.getBanks();
         List<Exchange> exchangeList = null;
-        if (chatSetting.getBank().toString().equals("Monobank")) {
-            result.append("Курс в Монобанк").append(System.lineSeparator());
-            exchangeList = new MonobankUtils().getExchangeList();
-        }
-        if (chatSetting.getBank().toString().equals("NBU")) {
-            result.append("Курс в НБУ").append(System.lineSeparator());
-            exchangeList = new NBUUtils().getExchangeList();
-        }
-        if (chatSetting.getBank().toString().equals("/privatbank")) {
-            result.append("Курс в ПриватБанк").append(System.lineSeparator());
-            exchangeList = new PrivatbankUtils().getExchangeList();
+        for (Bank bank: banks
+             ) {
+            if (bank.getCommandName().equals(chatSetting.getBank().getCommandName())){
+                exchangeList = bank.getExchangeList();
+                result.append(bank.getCommandResultText()).append(System.lineSeparator());
+                break;
+            }
+
         }
 
         if (Objects.nonNull(exchangeList)) {

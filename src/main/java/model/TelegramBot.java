@@ -40,28 +40,40 @@ import java.util.concurrent.TimeUnit;
 public class TelegramBot extends TelegramLongPollingBot {
     private static final List<EditCommand> editCommands = new ArrayList<>();
     private static final List<SendCommand> sendCommands = new ArrayList<>();
+    private static final List<Bank> banks = new ArrayList<>();
     private static final int TIME_ZONE = 3;
 
     public final Repository repository;
 
     public TelegramBot(Repository repository) {
         super();
-        addEditCommands();
-        addSendCommands();
+        setEditCommandList();
+        setSendCommandList();
+        setBanks();
         this.repository = repository;
         startScheduledTasks();
         startUpdateBankInfoTask();
     }
 
     public static List<EditCommand> getEditCommands() {
-        return editCommands;
+        return List.copyOf(editCommands);
     }
 
     public static List<SendCommand> getSendCommands() {
-        return sendCommands;
+        return List.copyOf(sendCommands);
     }
 
-    private static void addEditCommands() {
+    public static List<Bank> getBanks() {
+        return List.copyOf(banks);
+    }
+
+    private static void setBanks() {
+        banks.add(new PrivatbankUtils());
+        banks.add(new MonobankUtils());
+        banks.add(new NBUUtils());
+    }
+
+    private static void setEditCommandList() {
         editCommands.add(new RoundToTwo());
         editCommands.add(new RoundToTree());
         editCommands.add(new RoundToFour());
@@ -84,7 +96,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         editCommands.add(new SetReminderAtNone());
     }
 
-    private static void addSendCommands() {
+    private static void setSendCommandList() {
         sendCommands.add(new Start());              //0
         sendCommands.add(new Setting());            //1
         sendCommands.add(new RoundSetting());       //2
@@ -169,12 +181,16 @@ public class TelegramBot extends TelegramLongPollingBot {
             for (EditCommand command : editCommands) {
                 if (command.canExecute(callData)) {
                     editMessage = command.execute(chatSetting, messageId, repository);
+                    break;
                 }
             }
             SendMessage message = null;
-            for (SendCommand command : sendCommands) {
-                if (command.canExecute(callData)) {
-                    message = command.execute(chatSetting);
+            if (Objects.isNull(editMessage)) {
+                for (SendCommand command : sendCommands) {
+                    if (command.canExecute(callData)) {
+                        message = command.execute(chatSetting);
+                        break;
+                    }
                 }
             }
             try {

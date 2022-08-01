@@ -9,21 +9,20 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Start extends SendCommand {
-    protected static final String COMMAND_NAME = "/start";
+    public static final String COMMAND_NAME = "/start";
     protected static final String BUTTON_TEXT = "/start";
     protected static final String COMMAND_RESULT_TEXT = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют";
 
     public Start() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
     }
-    public InlineKeyboardButton getHomeButton(){
+    public static InlineKeyboardButton getHomeButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":house:" + "Додому"));
-        button.setCallbackData(commandName);
+        button.setCallbackData(COMMAND_NAME);
         return button;
     }
     @Override
@@ -38,10 +37,14 @@ public class Start extends SendCommand {
 
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
-        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-        buttons.add(List.of(new GetInfo().getButton()));
-        buttons.add(List.of(new Setting().getButton()));
-        return buttons;
+        return settingsButtons;
+    }
+
+    @Override
+    protected void setSettingsButtons() {
+        settingsButtons.add(List.of(new GetInfo().getButton()));
+        settingsButtons.add(List.of(new Setting().getButton()));
+
     }
 
     @Override
