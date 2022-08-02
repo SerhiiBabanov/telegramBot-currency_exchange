@@ -10,8 +10,8 @@ import java.util.List;
 public abstract class SendCommand extends Command {
     protected List<List<InlineKeyboardButton>> settingsButtons = new ArrayList<>();
 
-    public SendCommand(String commandName, String buttonText, String commandResultText) {
-        super(commandName, buttonText, commandResultText);
+    public SendCommand(String commandName, String buttonText, String commandResultText, String parentCommand) {
+        super(commandName, buttonText, commandResultText, parentCommand);
         setSettingsButtons();
     }
 

@@ -7,16 +7,13 @@ import repository.Repository;
 import static model.TelegramBot.getSendCommands;
 
 public abstract class EditCommand extends Command {
-    private final String parentCommand;
+
 
     protected EditCommand(String commandName, String buttonText, String commandResultText, String parentCommand) {
-        super(commandName, buttonText, commandResultText);
-        this.parentCommand = parentCommand;
+        super(commandName, buttonText, commandResultText, parentCommand);
     }
 
-    public String getParentCommand() {
-        return parentCommand;
-    }
+
 
     public EditMessageText execute(ChatSetting chatSetting, int messageId, Repository repository) {
         setSetting(chatSetting, repository);

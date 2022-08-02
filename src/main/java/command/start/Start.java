@@ -15,9 +15,9 @@ public class Start extends SendCommand {
     public static final String COMMAND_NAME = "/start";
     protected static final String BUTTON_TEXT = "/start";
     protected static final String COMMAND_RESULT_TEXT = "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют";
-
+    protected static final String PARENT_COMMAND = COMMAND_NAME;
     public Start() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
     public static InlineKeyboardButton getHomeButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();

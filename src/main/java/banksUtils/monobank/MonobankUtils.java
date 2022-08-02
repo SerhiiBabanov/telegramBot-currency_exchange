@@ -12,8 +12,7 @@ import java.util.List;
 public class MonobankUtils extends Bank {
     private final static String URL = "https://api.monobank.ua/bank/currency";
     public static final String COMMAND_NAME = "/setMonobank";
-    protected static final String BUTTON_TEXT = "Монобанк";
-    protected static final String COMMAND_RESULT_TEXT = "Курс в Монобанк";
+    protected static final String NAME = "Монобанк";
 
     private final static Type typeToken = new TypeToken<List<MonoExchange>>() {
     }.getType();
@@ -24,7 +23,7 @@ public class MonobankUtils extends Bank {
     }
 
     public MonobankUtils() {
-        super(COMMAND_NAME, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, NAME);
     }
 
     public static void updateExchangeList() {

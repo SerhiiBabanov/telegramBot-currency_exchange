@@ -12,8 +12,7 @@ import java.util.List;
 public class PrivatbankUtils extends Bank {
     private static final String URL = "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11";
     public static final String COMMAND_NAME = "/setPrivatbank";
-    protected static final String BUTTON_TEXT = "Приватбанк";
-    protected static final String COMMAND_RESULT_TEXT = "Курс в ПриватБанк";
+    protected static final String NAME = "Приватбанк";
 
     private static final Type typeToken = new TypeToken<List<Exchange>>() {
     }.getType();
@@ -24,7 +23,7 @@ public class PrivatbankUtils extends Bank {
     }
 
     public PrivatbankUtils() {
-        super(COMMAND_NAME, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, NAME);
     }
 
     public static void updateExchangeList() {

@@ -4,19 +4,19 @@ import java.util.List;
 
 public abstract class Bank {
     protected final String commandName;
-    protected final String commandResultText;
+    protected final String name;
 
-    protected Bank(String commandName, String commandResultText) {
+    protected Bank(String commandName, String name) {
         this.commandName = commandName;
-        this.commandResultText = commandResultText;
+        this.name = name;
     }
 
     public String getCommandName() {
         return commandName;
     }
 
-    public String getCommandResultText() {
-        return commandResultText;
+    public String getName() {
+        return name;
     }
 
     public abstract List<Exchange> getExchangeList();

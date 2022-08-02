@@ -13,8 +13,7 @@ public class NBUUtils extends Bank {
 
     private static final String URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
     public static final String COMMAND_NAME = "/setNBU";
-    protected static final String BUTTON_TEXT = "НБУ";
-    protected static final String COMMAND_RESULT_TEXT = "Курс в НБУ";
+    protected static final String NAME = "НБУ";
 
     private static final Type typeToken = new TypeToken<List<NBUExchange>>() {
     }.getType();
@@ -25,7 +24,7 @@ public class NBUUtils extends Bank {
     }
 
     public NBUUtils() {
-        super(COMMAND_NAME, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, NAME);
     }
 
     public static void updateExchangeList() {

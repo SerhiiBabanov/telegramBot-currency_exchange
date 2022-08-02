@@ -3,6 +3,7 @@ package command.setting.reminders;
 import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
 import command.setting.Setting;
+import command.setting.bank.BankSetting;
 import command.start.Start;
 import model.ChatSetting;
 import model.EditCommand;
@@ -18,15 +19,15 @@ public class ReminderSetting extends SendCommand {
     public static final String COMMAND_NAME = "/reminderSetting";
     protected static final String BUTTON_TEXT = "Час сповіщень";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
-
+    protected static final String PARENT_COMMAND = Setting.COMMAND_NAME;
     public ReminderSetting() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
     @Override
     public InlineKeyboardButton getBackButton(){
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(Setting.COMMAND_NAME);
+        button.setCallbackData(PARENT_COMMAND);
         return button;
     }
     @Override

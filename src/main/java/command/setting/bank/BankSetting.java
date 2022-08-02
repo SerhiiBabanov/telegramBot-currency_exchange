@@ -18,32 +18,34 @@ public class BankSetting extends SendCommand {
     public static final String COMMAND_NAME = "/bankSetting";
     protected static final String BUTTON_TEXT = "Банк";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
+    protected static final String PARENT_COMMAND = Setting.COMMAND_NAME;
 
     public BankSetting() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
+
     @Override
-    public InlineKeyboardButton getBackButton(){
-        InlineKeyboardButton button = new InlineKeyboardButton();
-        button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
-        button.setCallbackData(Setting.COMMAND_NAME);
-        return button;
-    }
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         Gson gson = new Gson();
         return Stream.concat(
                 settingsButtons.stream()
-                .flatMap(Collection::stream)
-                .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
-                .peek(button -> {
-                    if (button.getCallbackData().equals(chatSetting.getBank().getCommandName())) {
-                        button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
-                    }
-                })
-                .map(Arrays::asList),
+                        .flatMap(Collection::stream)
+                        .map(button -> gson.fromJson(gson.toJson(button), InlineKeyboardButton.class))
+                        .peek(button -> {
+                            if (button.getCallbackData().equals(chatSetting.getBank().getCommandName())) {
+                                button.setText(EmojiParser.parseToUnicode(":white_check_mark:" + button.getText()));
+                            }
+                        })
+                        .map(Arrays::asList),
                 Stream.of(List.of(Start.getHomeButton(), getBackButton()))).collect(Collectors.toList());
 
     }
 
-
+    @Override
+    public InlineKeyboardButton getBackButton() {
+        InlineKeyboardButton button = new InlineKeyboardButton();
+        button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
+        button.setCallbackData(PARENT_COMMAND);
+        return button;
+    }
 }

@@ -1,5 +1,6 @@
 package command.info;
 
+import command.start.Start;
 import model.*;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -14,11 +15,17 @@ public class GetInfo extends SendCommand {
     public static final String COMMAND_NAME = "/getInfo";
     protected static final String BUTTON_TEXT = "Отримати інфо";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
-
+    protected static final String PARENT_COMMAND = Start.COMMAND_NAME;
     public GetInfo() {
-        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT);
+        super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
-
+    private String getExchangeAfterRoundResults(Exchange exchange, ChatSetting chatSetting) {
+        BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
+        BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
+        return exchange.ccy + '\\' + exchange.base_ccy + System.lineSeparator() +
+                "Покупка:" + buy + System.lineSeparator() +
+                "Продажа:" + sale + System.lineSeparator();
+    }
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
         SendMessage sendMessage = new SendMessage();
@@ -32,7 +39,7 @@ public class GetInfo extends SendCommand {
              ) {
             if (bank.getCommandName().equals(chatSetting.getBank().getCommandName())){
                 exchangeList = bank.getExchangeList();
-                result.append(bank.getCommandResultText()).append(System.lineSeparator());
+                result.append("Курс в ").append(bank.getName()).append(System.lineSeparator());
                 break;
             }
 
@@ -64,11 +71,5 @@ public class GetInfo extends SendCommand {
         return null;
     }
 
-    private String getExchangeAfterRoundResults(Exchange exchange, ChatSetting chatSetting) {
-        BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
-        BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
-        return exchange.ccy + '\\' + exchange.base_ccy + System.lineSeparator() +
-                "Покупка:" + buy + System.lineSeparator() +
-                "Продажа:" + sale + System.lineSeparator();
-    }
+
 }
