@@ -1,1 +1,1 @@
-web: java -jar out\artifacts\goit_java_telegramBot_jar
+worker: java  -jar build/libs/goit-java-telegramBot-1.0-SNAPSHOT-all.jar

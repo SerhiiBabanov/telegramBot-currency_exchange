@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'org.example'
@@ -15,9 +16,9 @@ dependencies {
     implementation group: 'com.vdurmont', name: 'emoji-java', version: '4.0.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    implementation 'com.github.jsimone:webapp-runner:9.0.27.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+
+
 }
 
 test {
@@ -30,4 +31,12 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'AppLauncher'
+        )
+    }
+}
 
+tasks.build.dependsOn tasks.shadowJar
