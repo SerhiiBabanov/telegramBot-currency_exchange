@@ -4,21 +4,22 @@ import banksUtils.monobank.MonobankUtils;
 import banksUtils.nbu.NBUUtils;
 import banksUtils.privatbank.PrivatbankUtils;
 import command.info.GetInfo;
-import command.setting.currency.CurrencySetting;
-import command.setting.currency.options.CAD;
-import command.setting.currency.options.PLZ;
-import command.setting.currency.options.USD;
 import command.setting.Setting;
 import command.setting.bank.BankSetting;
 import command.setting.bank.options.SetBankMonobank;
 import command.setting.bank.options.SetBankNBU;
 import command.setting.bank.options.SetBankPrivatbank;
+import command.setting.currency.CurrencySetting;
+import command.setting.currency.options.CAD;
+import command.setting.currency.options.PLZ;
+import command.setting.currency.options.USD;
 import command.setting.reminders.ReminderSetting;
 import command.setting.reminders.options.*;
 import command.setting.roundResults.RoundSetting;
 import command.setting.roundResults.options.RoundToFour;
 import command.setting.roundResults.options.RoundToTree;
 import command.setting.roundResults.options.RoundToTwo;
+import command.start.LocalCH;
 import command.start.Start;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -30,12 +31,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import repository.Repository;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 public class TelegramBot extends TelegramLongPollingBot {
     private static final List<EditCommand> editCommands = new ArrayList<>();
@@ -65,6 +65,26 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public static List<Bank> getBanks() {
         return List.copyOf(banks);
+    }
+
+    private static void changeLocal(Locale locale) {
+        ResourceBundle bundle = ResourceBundle.getBundle("resources.Resource", locale);
+//        Stream.concat(getEditCommands().stream(), getSendCommands().stream())
+//                .forEach(command -> {
+//                    command.setCommandResultText("");
+//                    command.setButtonText("");
+//                });
+        String buttonText = bundle.getString("/start" + "buttonText".toUpperCase());
+        String commandResultText = bundle.getString("/start" + "commandResultText".toUpperCase());
+        for (Command command: getSendCommands()
+             ) {
+            if (command.canExecute("/start")){
+                command.setButtonText(buttonText);
+                command.setCommandResultText(commandResultText);
+            }
+
+        }
+
     }
 
     private static void setBanks() {
@@ -104,6 +124,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendCommands.add(new BankSetting());        //4
         sendCommands.add(new CurrencySetting());    //5
         sendCommands.add(new ReminderSetting());    //6
+        sendCommands.add(new LocalCH("/ch", "US", "change", "/start"));
     }
 
     private void startScheduledTasks() {

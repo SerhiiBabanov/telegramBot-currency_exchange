@@ -4,8 +4,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 public abstract class Command {
     protected final String commandName;
-    protected final String buttonText;
-    protected final String commandResultText;
+    protected String buttonText;
+    protected String commandResultText;
     protected final String parentCommand;
 
     protected Command(String commandName, String buttonText, String commandResultText, String parentCommand) {
@@ -22,6 +22,13 @@ public abstract class Command {
         return parentCommand;
     }
 
+    public void setButtonText(String buttonText) {
+        this.buttonText = buttonText;
+    }
+
+    public void setCommandResultText(String commandResultText) {
+        this.commandResultText = commandResultText;
+    }
 
     public boolean canExecute(String commandName) {
         return this.commandName.equalsIgnoreCase(commandName);

@@ -44,6 +44,7 @@ public class Start extends SendCommand {
     protected void setSettingsButtons() {
         settingsButtons.add(List.of(new GetInfo().getButton()));
         settingsButtons.add(List.of(new Setting().getButton()));
+        settingsButtons.add(List.of(new LocalCH("/ch", "US", "change", "/start").getButton()));
 
     }
 
