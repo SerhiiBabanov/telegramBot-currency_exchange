@@ -180,13 +180,13 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "goit_java_telegram_bot";
+        return "test";
        // return "testBotjava1221bot";
     }
 
     @Override
     public String getBotToken() {
-        return "5588477547:AAHAGkA7oAgtwJTdH34DIC5DocwS_dSKOvY";
+        return "test";
        // return "5728357202:AAGZMzZVJCP-wXxm4AQrRO8_vx8Nge8lVu4";
     }
 
