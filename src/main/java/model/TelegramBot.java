@@ -13,13 +13,15 @@ import command.setting.currency.CurrencySetting;
 import command.setting.currency.options.CAD;
 import command.setting.currency.options.PLZ;
 import command.setting.currency.options.USD;
+import command.setting.languages.LanguagesSetting;
+import command.setting.languages.options.LanguageUA;
+import command.setting.languages.options.LanguageUS;
 import command.setting.reminders.ReminderSetting;
 import command.setting.reminders.options.*;
 import command.setting.roundResults.RoundSetting;
 import command.setting.roundResults.options.RoundToFour;
 import command.setting.roundResults.options.RoundToTree;
 import command.setting.roundResults.options.RoundToTwo;
-import command.start.LocalCH;
 import command.start.Start;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -38,10 +40,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class TelegramBot extends TelegramLongPollingBot {
+    private static String homeButtonText = "Додому";
+    private static String backButtonText = "Назад";
     private static final List<EditCommand> editCommands = new ArrayList<>();
     private static final List<SendCommand> sendCommands = new ArrayList<>();
     private static final List<Bank> banks = new ArrayList<>();
     private static final int TIME_ZONE = 3;
+
 
     public final Repository repository;
 
@@ -67,23 +72,28 @@ public class TelegramBot extends TelegramLongPollingBot {
         return List.copyOf(banks);
     }
 
-    private static void changeLocal(Locale locale) {
+    public static void changeLocal(Locale locale) {
         ResourceBundle bundle = ResourceBundle.getBundle("resources.Resource", locale);
-//        Stream.concat(getEditCommands().stream(), getSendCommands().stream())
-//                .forEach(command -> {
-//                    command.setCommandResultText("");
-//                    command.setButtonText("");
-//                });
-        String buttonText = bundle.getString("/start" + "buttonText".toUpperCase());
-        String commandResultText = bundle.getString("/start" + "commandResultText".toUpperCase());
-        for (Command command: getSendCommands()
-             ) {
-            if (command.canExecute("/start")){
-                command.setButtonText(buttonText);
-                command.setCommandResultText(commandResultText);
-            }
 
-        }
+        setHomeButtonText(bundle.getString("homeButtonText"));
+        setBackButtonText(bundle.getString("backButtonText"));
+
+        GetInfo.setBuyText(bundle.getString("buyText"));
+        GetInfo.setCourseText(bundle.getString("courseText"));
+        GetInfo.setResultText(bundle.getString("resultText"));
+        GetInfo.setSellText(bundle.getString("sellText"));
+
+        banks.stream().forEach(bank -> bank.setName(bundle.getString(bank.getCommandName())));
+
+        Stream.concat(editCommands.stream(), sendCommands.stream())
+                .forEach(command -> {
+                    command.setCommandResultText(bundle.getString(command.getCommandName() + "commandResultText".toUpperCase()));
+                    command.setButtonText(bundle.getString(command.getCommandName() + "buttonText".toUpperCase()));
+                });
+
+        sendCommands.stream().forEach(SendCommand::setSettingsButtons);
+
+
 
     }
 
@@ -114,17 +124,19 @@ public class TelegramBot extends TelegramLongPollingBot {
         editCommands.add(new SetReminderAt17());
         editCommands.add(new SetReminderAt18());
         editCommands.add(new SetReminderAtNone());
+        editCommands.add(new LanguageUA());
+        editCommands.add(new LanguageUS());
     }
 
     private static void setSendCommandList() {
-        sendCommands.add(new Start());              //0
-        sendCommands.add(new Setting());            //1
         sendCommands.add(new RoundSetting());       //2
         sendCommands.add(new GetInfo());            //3
         sendCommands.add(new BankSetting());        //4
         sendCommands.add(new CurrencySetting());    //5
         sendCommands.add(new ReminderSetting());    //6
-        sendCommands.add(new LocalCH("/ch", "US", "change", "/start"));
+        sendCommands.add(new LanguagesSetting());
+        sendCommands.add(new Setting());
+        sendCommands.add(new Start());
     }
 
     private void startScheduledTasks() {
@@ -169,11 +181,29 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
         return "goit_java_telegram_bot";
+       // return "testBotjava1221bot";
     }
 
     @Override
     public String getBotToken() {
         return "5588477547:AAHAGkA7oAgtwJTdH34DIC5DocwS_dSKOvY";
+       // return "5728357202:AAGZMzZVJCP-wXxm4AQrRO8_vx8Nge8lVu4";
+    }
+
+    public static String getHomeButtonText() {
+        return homeButtonText;
+    }
+
+    public static String getBackButtonText() {
+        return backButtonText;
+    }
+
+    public static void setHomeButtonText(String homeButtonText) {
+        TelegramBot.homeButtonText = homeButtonText;
+    }
+
+    public static void setBackButtonText(String backButtonText) {
+        TelegramBot.backButtonText = backButtonText;
     }
 
     @Override

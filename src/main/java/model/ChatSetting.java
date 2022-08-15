@@ -4,25 +4,28 @@ import banksUtils.privatbank.PrivatbankUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ChatSetting {
-    long chatId;
-    int roundDigit;
-    Bank bank;
-    int reminderTime;
-    List<Currency> currencies;
+    private long chatId;
+    private int roundDigit;
+    private Bank bank;
+    private int reminderTime;
+    private List<Currency> currencies;
+    private Locale locale;
 
     public ChatSetting(long chatId) {
         this.chatId = chatId;
     }
 
-    public ChatSetting(long chatId, int roundDigit, Bank bank, int reminderTime, List<Currency> currencies) {
+    public ChatSetting(long chatId, int roundDigit, Bank bank, int reminderTime, List<Currency> currencies, Locale locale) {
         this.chatId = chatId;
         this.roundDigit = roundDigit;
         this.bank = bank;
         this.reminderTime = reminderTime;
         this.currencies = currencies;
+        this.locale = locale;
     }
 
     public static ChatSetting getDefault(long chatId) {
@@ -34,6 +37,7 @@ public class ChatSetting {
         currencyList.add(Currency.USD);
         defaultSetting.setCurrencies(currencyList);
         defaultSetting.setReminderTime(13);
+        defaultSetting.setLocale(new Locale("ua"));
         return defaultSetting;
     }
 
@@ -72,6 +76,14 @@ public class ChatSetting {
 
     public void setCurrencies(List<Currency> currencies) {
         this.currencies = currencies;
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
     @Override

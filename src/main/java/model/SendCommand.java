@@ -32,5 +32,11 @@ public abstract class SendCommand extends Command {
                 settingsButtons.add(List.of(command.getButton()));
             }
         }
+        for (SendCommand command : TelegramBot.getSendCommands()) {
+            if (command.getParentCommand().equals(commandName)) {
+                settingsButtons.add(List.of(command.getButton()));
+            }
+        }
+        //settingsButtons.add(List.of(Start.getHomeButton(), getBackButton()));
     }
 }

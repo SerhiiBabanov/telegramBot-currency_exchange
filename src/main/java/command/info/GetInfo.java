@@ -16,6 +16,10 @@ public class GetInfo extends SendCommand {
     protected static final String BUTTON_TEXT = "Отримати інфо";
     protected static final String COMMAND_RESULT_TEXT = "EmptyText";
     protected static final String PARENT_COMMAND = Start.COMMAND_NAME;
+    protected static  String resultText = "Результати не знайдені";
+    protected static  String buyText = "Покупка";
+    protected static  String sellText = "Продажа";
+    protected static  String courseText = "Курс в ";
     public GetInfo() {
         super(COMMAND_NAME, BUTTON_TEXT, COMMAND_RESULT_TEXT, PARENT_COMMAND);
     }
@@ -23,14 +27,14 @@ public class GetInfo extends SendCommand {
         BigDecimal sale = BigDecimal.valueOf(exchange.getSale()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         BigDecimal buy = BigDecimal.valueOf(exchange.getBuy()).setScale(chatSetting.getRoundDigit(), RoundingMode.HALF_UP);
         return exchange.ccy + '\\' + exchange.base_ccy + System.lineSeparator() +
-                "Покупка:" + buy + System.lineSeparator() +
-                "Продажа:" + sale + System.lineSeparator();
+                buyText + buy + System.lineSeparator() +
+                sellText + sale + System.lineSeparator();
     }
     @Override
     public SendMessage execute(ChatSetting chatSetting) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatSetting.getChatId());
-        sendMessage.setText("Результати не знайдені");
+        sendMessage.setText(resultText);
         StringBuilder result = new StringBuilder();
 
         List<Bank> banks = TelegramBot.getBanks();
@@ -39,7 +43,7 @@ public class GetInfo extends SendCommand {
              ) {
             if (bank.getCommandName().equals(chatSetting.getBank().getCommandName())){
                 exchangeList = bank.getExchangeList();
-                result.append("Курс в ").append(bank.getName()).append(System.lineSeparator());
+                result.append(courseText).append(bank.getName()).append(System.lineSeparator());
                 break;
             }
 
@@ -61,6 +65,22 @@ public class GetInfo extends SendCommand {
         return sendMessage;
     }
 
+    public static void setResultText(String resultText) {
+        GetInfo.resultText = resultText;
+    }
+
+    public static void setBuyText(String buyText) {
+        GetInfo.buyText = buyText;
+    }
+
+    public static void setSellText(String sellText) {
+        GetInfo.sellText = sellText;
+    }
+
+    public static void setCourseText(String courseText) {
+        GetInfo.courseText = courseText;
+    }
+
     @Override
     public List<List<InlineKeyboardButton>> getKeyboard(ChatSetting chatSetting) {
         return null;
@@ -68,7 +88,7 @@ public class GetInfo extends SendCommand {
 
     @Override
     public InlineKeyboardButton getBackButton() {
-        return null;
+        return Start.getHomeButton();
     }
 
 

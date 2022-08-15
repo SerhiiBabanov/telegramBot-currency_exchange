@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class Bank {
     protected final String commandName;
-    protected final String name;
+    protected String name;
 
     protected Bank(String commandName, String name) {
         this.commandName = commandName;
@@ -17,6 +17,10 @@ public abstract class Bank {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public abstract List<Exchange> getExchangeList();

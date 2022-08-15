@@ -6,6 +6,7 @@ import command.setting.Setting;
 import command.start.Start;
 import model.ChatSetting;
 import model.SendCommand;
+import model.TelegramBot;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.Arrays;
@@ -44,7 +45,7 @@ public class BankSetting extends SendCommand {
     @Override
     public InlineKeyboardButton getBackButton() {
         InlineKeyboardButton button = new InlineKeyboardButton();
-        button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
+        button.setText(EmojiParser.parseToUnicode(":back:" + TelegramBot.getBackButtonText()));
         button.setCallbackData(PARENT_COMMAND);
         return button;
     }

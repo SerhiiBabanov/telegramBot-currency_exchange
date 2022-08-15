@@ -4,12 +4,11 @@ package command.setting.roundResults;
 import com.google.gson.Gson;
 import com.vdurmont.emoji.EmojiParser;
 import command.setting.Setting;
-import command.setting.bank.BankSetting;
 import command.start.Start;
 import model.ChatSetting;
 import model.SendCommand;
+import model.TelegramBot;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import repository.InMemoryListRepository;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,7 +27,7 @@ public class RoundSetting extends SendCommand {
     @Override
     public InlineKeyboardButton getBackButton() {
         InlineKeyboardButton button = new InlineKeyboardButton();
-        button.setText(EmojiParser.parseToUnicode(":back:" + "Назад"));
+        button.setText(EmojiParser.parseToUnicode(":back:" + TelegramBot.getBackButtonText()));
         button.setCallbackData(PARENT_COMMAND);
         return button;
     }
