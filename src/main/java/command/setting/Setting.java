@@ -1,10 +1,6 @@
 package command.setting;
 
 import com.vdurmont.emoji.EmojiParser;
-import command.setting.currency.CurrencySetting;
-import command.setting.bank.BankSetting;
-import command.setting.reminders.ReminderSetting;
-import command.setting.roundResults.RoundSetting;
 import command.start.Start;
 import model.ChatSetting;
 import model.SendCommand;
@@ -34,10 +30,7 @@ public class Setting extends SendCommand {
 
     @Override
     protected void setSettingsButtons() {
-        settingsButtons.add(List.of(new RoundSetting().getButton()));
-        settingsButtons.add(List.of(new BankSetting().getButton()));
-        settingsButtons.add(List.of(new CurrencySetting().getButton()));
-        settingsButtons.add(List.of(new ReminderSetting().getButton()));
+        super.setSettingsButtons();
         settingsButtons.add(List.of(Start.getHomeButton(), getBackButton()));
     }
 }
